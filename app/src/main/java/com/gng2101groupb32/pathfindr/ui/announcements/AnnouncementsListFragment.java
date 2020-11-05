@@ -65,7 +65,7 @@ public class AnnouncementsListFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new AnnouncementsListRecyclerViewAdapter(DummyContent.ITEMS));
+            recyclerView.setAdapter(new AnnouncementsListAdapter(DummyContent.ITEMS));
         }
         return view;
     }

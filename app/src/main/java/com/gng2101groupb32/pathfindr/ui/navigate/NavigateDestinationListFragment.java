@@ -65,7 +65,7 @@ public class NavigateDestinationListFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new NavigateDestinationListRecyclerViewAdapter(DummyContent.ITEMS));
+            recyclerView.setAdapter(new NavigateDestinationListAdapter(DummyContent.ITEMS));
         }
         return view;
     }
