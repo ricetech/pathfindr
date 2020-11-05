@@ -27,4 +27,10 @@
         android:name="com.gng2101groupb32.pathfindr.ui.navigate_dest_list.NavigateDestinationListFragment"
         android:label="@string/title_navigate_list"
         tools:layout="@layout/fragment_navigate_destination_list" />
+
+    <fragment
+        android:id="@+id/navigation_loc_list"
+        android:name="com.gng2101groupb32.pathfindr.loc_list.LocationsListFragment"
+        android:label="@string/title_location_info"
+        tools:layout="@layout/fragment_locations_list" />
 </navigation>

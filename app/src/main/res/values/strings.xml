@@ -7,6 +7,7 @@
     <string name="title_announcements">Announcements</string>
     <string name="title_navigate_list">Navigate - Select Destination</string>
     <string name="title_navigate">Navigate</string>
+    <string name="title_location_info">Location Info</string>
     <!-- Preference Titles -->
     <string name="messages_header">Messages</string>
     <string name="sync_header">Sync</string>

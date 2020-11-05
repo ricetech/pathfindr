@@ -17,6 +17,11 @@
         android:title="@string/title_navigate" />
 
     <item
+        android:id="@+id/navigation_loc_list"
+        android:icon="@drawable/ic_baseline_info_24"
+        android:title="@string/title_location_info" />
+
+    <item
         android:id="@+id/navigation_settings"
         android:icon="@drawable/ic_baseline_settings_24"
         android:title="@string/title_settings" />
