@@ -21,4 +21,10 @@
         android:name="com.gng2101groupb32.pathfindr.ui.announcements.AnnouncementsListFragment"
         android:label="@string/title_announcements"
         tools:layout="@layout/fragment_announcement_list" />
+
+    <fragment
+        android:id="@+id/navigation_nav_list"
+        android:name="com.gng2101groupb32.pathfindr.ui.navigate_dest_list.NavigateDestinationListFragment"
+        android:label="@string/title_navigate_list"
+        tools:layout="@layout/fragment_navigate_destination_list" />
 </navigation>

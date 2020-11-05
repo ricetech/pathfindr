@@ -5,6 +5,8 @@
     <string name="title_notifications">Notifications</string>
     <string name="title_settings">Settings</string>
     <string name="title_announcements">Announcements</string>
+    <string name="title_navigate_list">Navigate - Select Destination</string>
+    <string name="title_navigate">Navigate</string>
     <!-- Preference Titles -->
     <string name="messages_header">Messages</string>
     <string name="sync_header">Sync</string>
