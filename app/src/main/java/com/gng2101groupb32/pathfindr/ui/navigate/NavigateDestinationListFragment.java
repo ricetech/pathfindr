@@ -1,4 +1,4 @@
-package com.gng2101groupb32.pathfindr.ui.navigate_dest_list;
+package com.gng2101groupb32.pathfindr.ui.navigate;
 
 import android.content.Context;
 import android.os.Bundle;
