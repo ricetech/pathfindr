@@ -9,5 +9,5 @@
     android:layout_marginLeft="16dp"
     android:layout_marginRight="16dp"
     app:layoutManager="LinearLayoutManager"
-    tools:context=".loc_list.LocationsListFragment"
+    tools:context=".location_info.LocationsListFragment"
     tools:listitem="@layout/fragment_locations_list_item" />

@@ -1,4 +1,4 @@
-package com.gng2101groupb32.pathfindr.loc_list;
+package com.gng2101groupb32.pathfindr.location_info;
 
 import androidx.recyclerview.widget.RecyclerView;
 

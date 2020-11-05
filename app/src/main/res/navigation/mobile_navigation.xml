@@ -25,7 +25,7 @@
 
     <fragment
         android:id="@+id/navigation_loc_list"
-        android:name="com.gng2101groupb32.pathfindr.loc_list.LocationsListFragment"
+        android:name="com.gng2101groupb32.pathfindr.location_info.LocationsListFragment"
         android:label="@string/title_location_info"
         tools:layout="@layout/fragment_locations_list" />
 
