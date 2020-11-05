@@ -15,4 +15,10 @@
         android:id="@+id/navigation_settings"
         android:name="com.gng2101groupb32.pathfindr.ui.settings.SettingsFragment"
         android:label="@string/title_settings" />
+
+    <fragment
+        android:id="@+id/navigation_announcements"
+        android:name="com.gng2101groupb32.pathfindr.ui.announcements.AnnouncementsListFragment"
+        android:label="@string/title_announcements"
+        tools:layout="@layout/fragment_announcement_list" />
 </navigation>
