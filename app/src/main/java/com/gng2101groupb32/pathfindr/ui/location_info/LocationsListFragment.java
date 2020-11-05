@@ -1,4 +1,4 @@
-package com.gng2101groupb32.pathfindr.location_info;
+package com.gng2101groupb32.pathfindr.ui.location_info;
 
 import android.content.Context;
 import android.os.Bundle;
