@@ -14,6 +14,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -127,8 +128,7 @@ public class DBUtils {
                 }).addOnFailureListener(currentActivity, failureListener);
     }
 
-    public static <T extends FireStoreDoc> void getLiveCollection(Activity currentActivity,
-                                                                  EventListener<List<T>> eventListener,
+    public static <T extends FireStoreDoc> void getLiveCollection(EventListener<List<T>> eventListener,
                                                                   String collectionName, final Class<T> outputClass) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -152,5 +152,22 @@ public class DBUtils {
                     eventListener.onEvent(collection, e);
                     Log.d(TAG, "Output: " + collection);
                 });
+    }
+
+    public static String timeSince(Date date) {
+        Date now = new Date();
+        double secondsPast = ((double) now.getTime() - (double) date.getTime()) / 1000;
+
+        if (secondsPast < 60 && secondsPast >= 0) {
+            return "Just now";
+        } else if (secondsPast < 3600) {
+            return Math.round(secondsPast / 60) + " m ago";
+        } else if (secondsPast < 86400) {
+            return Math.round(secondsPast / 3600) + " h ago";
+        } else if (secondsPast < 604800) {
+            return Math.round(secondsPast / 86400) + " days ago";
+        } else {
+            return date.toString();
+        }
     }
 }
