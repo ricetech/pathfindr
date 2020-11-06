@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "558060363737",
+    "firebase_url": "https://pathfindr-b32.firebaseio.com",
+    "project_id": "pathfindr-b32",
+    "storage_bucket": "pathfindr-b32.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:558060363737:android:650b01e59f07c5275f03c8",
+        "android_client_info": {
+          "package_name": "com.gng2101groupb32.pathfindr"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "558060363737-tl97c4lus450t66l7724eobmhec9jbsd.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gng2101groupb32.pathfindr",
+            "certificate_hash": "c7c793984d08c7460f4b6a60bbb7690d5781ee49"
+          }
+        },
+        {
+          "client_id": "558060363737-4b7015dl425u42f83fd42k5kskvnjesd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCZVetEX_vxfOGp6MU_nsFoWx3ECyLeg20"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "558060363737-4b7015dl425u42f83fd42k5kskvnjesd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
