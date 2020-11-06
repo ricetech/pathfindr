@@ -1,26 +1,27 @@
 package com.gng2101groupb32.pathfindr.ui.announcements;
 
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.gng2101groupb32.pathfindr.R;
-import com.gng2101groupb32.pathfindr.dummy.DummyContent.DummyItem;
+import com.gng2101groupb32.pathfindr.db.Announcement;
+import com.gng2101groupb32.pathfindr.db.DBUtils;
 
 import java.util.List;
 
 /**
- * {@link RecyclerView.Adapter} that can display a {@link DummyItem}.
+ * {@link RecyclerView.Adapter} that can display a {@link Announcement}.
  * TODO: Replace the implementation with code for your data type.
  */
 public class AnnouncementsListAdapter extends RecyclerView.Adapter<AnnouncementsListAdapter.ViewHolder> {
 
-    private final List<DummyItem> mValues;
+    private final List<Announcement> mValues;
 
-    public AnnouncementsListAdapter(List<DummyItem> items) {
+    public AnnouncementsListAdapter(List<Announcement> items) {
         mValues = items;
     }
 
@@ -34,8 +35,8 @@ public class AnnouncementsListAdapter extends RecyclerView.Adapter<Announcements
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-        holder.mIdView.setText(mValues.get(position).id);
-        holder.mContentView.setText(mValues.get(position).content);
+        holder.mTitleView.setText(mValues.get(position).getTitle());
+        holder.mTimeframeView.setText(DBUtils.timeSince(mValues.get(position).getTimestamp().toDate()));
     }
 
     @Override
@@ -45,20 +46,20 @@ public class AnnouncementsListAdapter extends RecyclerView.Adapter<Announcements
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
-        public final TextView mIdView;
-        public final TextView mContentView;
-        public DummyItem mItem;
+        public final TextView mTitleView;
+        public final TextView mTimeframeView;
+        public Announcement mItem;
 
         public ViewHolder(View view) {
             super(view);
             mView = view;
-            mIdView = (TextView) view.findViewById(R.id.announcement_name);
-            mContentView = (TextView) view.findViewById(R.id.announcement_timeframe);
+            mTitleView = (TextView) view.findViewById(R.id.announcement_name);
+            mTimeframeView = (TextView) view.findViewById(R.id.announcement_timeframe);
         }
 
         @Override
         public String toString() {
-            return super.toString() + " '" + mContentView.getText() + "'";
+            return super.toString() + " '" + mTimeframeView.getText() + "'";
         }
     }
 }
