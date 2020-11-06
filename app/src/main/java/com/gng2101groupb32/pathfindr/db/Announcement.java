@@ -76,4 +76,11 @@ public class Announcement implements FireStoreDoc {
     public void setTimestamp(Timestamp timestamp) {
         this.timestamp = timestamp;
     }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return "ID: " + this.id + ", TITLE: " + this.title + ", CONTENT: " + this.content +
+                ", TIMESTAMP: " + this.timestamp.toString();
+    }
 }
