@@ -2,28 +2,31 @@ package com.gng2101groupb32.pathfindr.db;
 
 import android.app.Activity;
 
+import androidx.annotation.NonNull;
+
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.Timestamp;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.ServerTimestamp;
 
-import java.util.Date;
 import java.util.List;
 
 public class Announcement implements FireStoreDoc {
     private static final String ANNOUNCEMENTS_COLLECTION_NAME = "announcements";
 
     private String title;
-    private String body;
+    private String content;
     private String id;
     @ServerTimestamp
-    private Date timestamp; // Set automatically by FireStore, hence the annotation
+    private Timestamp timestamp; // Set automatically by FireStore, hence the annotation
 
     public Announcement() {
     }
 
-    public Announcement(String title, String body) {
+    public Announcement(String title, String content) {
         this.title = title;
-        this.body = body;
+        this.content = content;
     }
 
     /**
@@ -50,12 +53,12 @@ public class Announcement implements FireStoreDoc {
         this.title = title;
     }
 
-    public String getBody() {
-        return body;
+    public String getContent() {
+        return content;
     }
 
-    public void setBody(String body) {
-        this.body = body;
+    public void setContent(String content) {
+        this.content = content;
     }
 
     public String getId() {
@@ -66,7 +69,7 @@ public class Announcement implements FireStoreDoc {
         this.id = id;
     }
 
-    public Date getTimestamp() {
+    public Timestamp getTimestamp() {
         return timestamp;
     }
 
