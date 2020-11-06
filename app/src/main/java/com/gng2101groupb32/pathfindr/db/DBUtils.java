@@ -1,6 +1,7 @@
 package com.gng2101groupb32.pathfindr.db;
 
 import android.app.Activity;
+import android.util.Log;
 
 import com.gng2101groupb32.pathfindr.exceptions.UserNotLoggedInException;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -8,6 +9,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
@@ -24,6 +26,8 @@ import java.util.Objects;
  * @author Eric Chen, uOttawa 300136076
  */
 public class DBUtils {
+    private static final String TAG = "DBUtils";
+
     /**
      * Method used to create a new object from a Firebase Cloud FireStore document.
      * <p>
@@ -121,5 +125,32 @@ public class DBUtils {
 
                     successListener.onSuccess(collection);
                 }).addOnFailureListener(currentActivity, failureListener);
+    }
+
+    public static <T extends FireStoreDoc> void getLiveCollection(Activity currentActivity,
+                                                                  EventListener<List<T>> eventListener,
+                                                                  String collectionName, final Class<T> outputClass) {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        db.collection(collectionName)
+                .addSnapshotListener((value, e) -> {
+                    if (e != null) {
+                        Log.w(TAG, "Listen failed.", e);
+                        return;
+                    }
+
+                    List<T> collection = new ArrayList<>();
+
+                    for (QueryDocumentSnapshot document : value) {
+                        // Convert Document into specified class
+                        T obj = Objects.requireNonNull(document.toObject(outputClass));
+                        // Add FireStore ID to Document Object
+                        obj.setId(document.getId());
+                        collection.add(obj);
+                    }
+
+                    eventListener.onEvent(collection, e);
+                    Log.d(TAG, "Output: " + collection);
+                });
     }
 }
