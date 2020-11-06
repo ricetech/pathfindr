@@ -45,6 +45,10 @@ public class Announcement implements FireStoreDoc {
                 ANNOUNCEMENTS_COLLECTION_NAME, Announcement.class);
     }
 
+    public static void getLiveAnnouncements(EventListener<List<Announcement>> eventListener) {
+        DBUtils.getLiveCollection(eventListener, ANNOUNCEMENTS_COLLECTION_NAME, Announcement.class);
+    }
+
     public String getTitle() {
         return title;
     }
