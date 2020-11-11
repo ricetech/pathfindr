@@ -8,6 +8,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.Exclude;
 import com.google.firebase.firestore.ServerTimestamp;
 
 import java.util.List;
@@ -17,6 +18,8 @@ public class Announcement implements FireStoreDoc {
 
     private String title;
     private String content;
+    // id is used to store the document id clientside and should not be synced to FireStore.
+    @Exclude
     private String id;
     @ServerTimestamp
     private Timestamp timestamp; // Set automatically by FireStore, hence the annotation
