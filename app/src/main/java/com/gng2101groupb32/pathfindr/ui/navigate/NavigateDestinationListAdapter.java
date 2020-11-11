@@ -10,6 +10,8 @@ import android.widget.TextView;
 import com.gng2101groupb32.pathfindr.R;
 import com.gng2101groupb32.pathfindr.dummy.DummyContent.DummyItem;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.List;
 
 /**
@@ -24,6 +26,7 @@ public class NavigateDestinationListAdapter extends RecyclerView.Adapter<Navigat
         mValues = items;
     }
 
+    @NotNull
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
@@ -56,6 +59,7 @@ public class NavigateDestinationListAdapter extends RecyclerView.Adapter<Navigat
             mContentView = (TextView) view.findViewById(R.id.content);
         }
 
+        @NotNull
         @Override
         public String toString() {
             return super.toString() + " '" + mContentView.getText() + "'";

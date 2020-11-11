@@ -14,8 +14,6 @@ import com.gng2101groupb32.pathfindr.db.DBUtils;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collections;
-import java.util.Comparator;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -64,6 +62,7 @@ public class AnnouncementsListAdapter extends RecyclerView.Adapter<Announcements
             mTimeframeView = (TextView) view.findViewById(R.id.announcement_timeframe);
         }
 
+        @NotNull
         @Override
         public String toString() {
             return super.toString() + " '" + mTimeframeView.getText() + "'";
