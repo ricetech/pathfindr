@@ -11,6 +11,9 @@ import com.gng2101groupb32.pathfindr.R;
 import com.gng2101groupb32.pathfindr.db.Announcement;
 import com.gng2101groupb32.pathfindr.db.DBUtils;
 
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -34,6 +37,7 @@ public class AnnouncementsListAdapter extends RecyclerView.Adapter<Announcements
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
+        Collections.sort(mValues, (a1, a2) -> a2.getTimestamp().compareTo(a1.getTimestamp()));
         holder.mItem = mValues.get(position);
         holder.mTitleView.setText(mValues.get(position).getTitle());
         holder.mTimeframeView.setText(DBUtils.timeSince(mValues.get(position).getTimestamp().toDate()));
