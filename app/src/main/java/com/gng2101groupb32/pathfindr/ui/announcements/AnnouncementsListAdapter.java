@@ -11,6 +11,8 @@ import com.gng2101groupb32.pathfindr.R;
 import com.gng2101groupb32.pathfindr.db.Announcement;
 import com.gng2101groupb32.pathfindr.db.DBUtils;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
@@ -28,6 +30,7 @@ public class AnnouncementsListAdapter extends RecyclerView.Adapter<Announcements
         mValues = items;
     }
 
+    @NotNull
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
