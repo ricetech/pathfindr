@@ -33,7 +33,6 @@ public class NavigateDestinationListFragment extends Fragment {
     }
 
     // TODO: Customize parameter initialization
-    @SuppressWarnings("unused")
     public static NavigateDestinationListFragment newInstance(int columnCount) {
         NavigateDestinationListFragment fragment = new NavigateDestinationListFragment();
         Bundle args = new Bundle();

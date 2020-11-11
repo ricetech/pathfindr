@@ -33,7 +33,6 @@ public class AnnouncementsListFragment extends Fragment {
     }
 
     // TODO: Customize parameter initialization
-    @SuppressWarnings("unused")
     public static AnnouncementsListFragment newInstance(int columnCount) {
         AnnouncementsListFragment fragment = new AnnouncementsListFragment();
         Bundle args = new Bundle();

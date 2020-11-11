@@ -33,7 +33,6 @@ public class LocationsListFragment extends Fragment {
     }
 
     // TODO: Customize parameter initialization
-    @SuppressWarnings("unused")
     public static LocationsListFragment newInstance(int columnCount) {
         LocationsListFragment fragment = new LocationsListFragment();
         Bundle args = new Bundle();
