@@ -15,6 +15,7 @@
         android:layout_marginBottom="4dp"
         android:ellipsize="end"
         android:lines="1"
+        android:textStyle="bold"
         android:textAppearance="?attr/textAppearanceListItem"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toTopOf="@id/announcement_timeframe" />
@@ -25,9 +26,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/text_margin"
         android:layout_marginEnd="@dimen/text_margin"
-        android:layout_marginBottom="6dp"
+        android:layout_marginBottom="12dp"
         android:ellipsize="end"
         android:lines="1"
+        android:textSize="12sp"
         android:textAppearance="?attr/textAppearanceListItem"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent" />
