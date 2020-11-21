@@ -154,20 +154,33 @@ public class DBUtils {
                 });
     }
 
+    /**
+     * Returns the date nicely formatted as a string. Depending on the time that has passed since
+     * the date, a different string will be returned (ex: "Just Now").
+     *
+     * @param date - The date to format
+     * @return The formatted date as a string
+     */
     public static String timeSince(Date date) {
         Date now = new Date();
+        long timeSince;
+        String units;
         double secondsPast = ((double) now.getTime() - (double) date.getTime()) / 1000;
 
         if (secondsPast < 60 && secondsPast >= 0) {
             return "Just now";
         } else if (secondsPast < 3600) {
-            return Math.round(secondsPast / 60) + " m ago";
+            timeSince = Math.round(secondsPast / 60);
+            units = timeSince == 1 ? " min " : " mins ";
         } else if (secondsPast < 86400) {
-            return Math.round(secondsPast / 3600) + " h ago";
+            timeSince = Math.round(secondsPast / 3600);
+            units = timeSince == 1 ? " hour " : " hours ";
         } else if (secondsPast < 604800) {
-            return Math.round(secondsPast / 86400) + " days ago";
+            timeSince = Math.round(secondsPast / 86400);
+            units = timeSince == 1 ? " day " : " days ";
         } else {
             return date.toString();
         }
+        return timeSince + units + "ago";
     }
 }
