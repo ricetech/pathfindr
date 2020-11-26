@@ -7,6 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelStoreOwner;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -19,15 +21,15 @@ import com.gng2101groupb32.pathfindr.db.Announcement;
  * A fragment representing a list of Items.
  */
 public class AnnouncementsListFragment extends Fragment {
-
-    // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
-    // TODO: Customize parameters
     private int mColumnCount = 1;
 
+    private AnnouncementsViewModel viewModel;
+    private RecyclerView announcements;
+
     /**
-     * Mandatory empty constructor for the fragment manager to instantiate the
-     * fragment (e.g. upon screen orientation changes).
+     * Mandatory empty constructor for the fragment manager to instantiate the fragment (e.g. upon
+     * screen orientation changes).
      */
     public AnnouncementsListFragment() {
     }
@@ -67,8 +69,13 @@ public class AnnouncementsListFragment extends Fragment {
             Announcement.getLiveAnnouncements((announcements, error) -> recyclerView.setAdapter(new AnnouncementsListAdapter(announcements)));
             // Add Dividers
             recyclerView.addItemDecoration(new DividerItemDecoration(getContext(),
-                    DividerItemDecoration.VERTICAL));
+                                                                     DividerItemDecoration.VERTICAL));
         }
+
+        // Init ViewModel
+        viewModel = new ViewModelProvider((ViewModelStoreOwner) requireActivity())
+                .get(AnnouncementsViewModel.class);
+
         return view;
     }
 }
