@@ -18,7 +18,6 @@ import java.util.List;
 
 /**
  * {@link RecyclerView.Adapter} that can display a {@link Announcement}.
- * TODO: Replace the implementation with code for your data type.
  */
 public class AnnouncementsListAdapter extends RecyclerView.Adapter<AnnouncementsListAdapter.ViewHolder> {
 
