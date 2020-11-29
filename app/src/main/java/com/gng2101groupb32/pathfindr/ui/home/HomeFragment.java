@@ -32,7 +32,7 @@ public class HomeFragment extends Fragment {
                 new ViewModelProvider(this).get(HomeViewModel.class);
         View root = inflater.inflate(R.layout.fragment_home, container, false);
         final TextView textView = root.findViewById(R.id.text_home);
-        homeViewModel.getText().observe(getViewLifecycleOwner(), s -> textView.setText(s));
+        homeViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         btnAnnouncements = root.findViewById(R.id.home_button_announcements);
         btnNavigate = root.findViewById(R.id.home_button_navigate);
         btnLocInfo = root.findViewById(R.id.home_button_loc_info);
@@ -57,10 +57,9 @@ public class HomeFragment extends Fragment {
             Navigation.findNavController(root).navigate(directions);
         });
 
-        btnHelp.setOnClickListener(view -> {
-            Toast.makeText(getContext(), "Error: This feature is not implemented yet!",
-                           Toast.LENGTH_LONG).show();
-        });
+        btnHelp.setOnClickListener(view -> Toast.makeText(getContext(),
+                                                          "Error: This feature is not implemented yet!",
+                                                          Toast.LENGTH_LONG).show());
 
         btnSettings.setOnClickListener(view -> {
             NavDirections directions = HomeFragmentDirections
