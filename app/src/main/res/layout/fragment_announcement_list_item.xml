@@ -8,42 +8,44 @@
 
     <TextView
         android:id="@+id/announcement_name"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/text_margin"
         android:layout_marginEnd="@dimen/text_margin"
         android:layout_marginBottom="4dp"
-        android:ellipsize="end"
-        android:lines="1"
-        android:textStyle="bold"
+        android:ellipsize="marquee"
+        android:singleLine="true"
         android:textAppearance="?attr/textAppearanceListItem"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/announcement_timeframe" />
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/announcement_timeframe"
+        app:layout_constraintEnd_toStartOf="@id/announcement_open"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/announcement_timeframe"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/text_margin"
         android:layout_marginEnd="@dimen/text_margin"
         android:layout_marginBottom="12dp"
-        android:ellipsize="end"
-        android:lines="1"
-        android:textSize="12sp"
+        android:ellipsize="marquee"
+        android:singleLine="true"
         android:textAppearance="?attr/textAppearanceListItem"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/announcement_open"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/announcement_open"
         style="?attr/materialButtonOutlinedStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/button_open"
-        android:layout_marginEnd="6dp"
         android:layout_marginTop="6dp"
+        android:layout_marginEnd="6dp"
         android:layout_marginBottom="6dp"
-        app:layout_constraintTop_toTopOf="parent"
+        android:text="@string/button_open"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
