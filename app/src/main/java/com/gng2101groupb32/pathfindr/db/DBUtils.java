@@ -169,13 +169,13 @@ public class DBUtils {
 
         if (secondsPast < 60 && secondsPast >= 0) {
             return "Just now";
-        } else if (secondsPast < 3600) {
+        } else if (secondsPast < 3600 && secondsPast >= 0) {
             timeSince = Math.round(secondsPast / 60);
             units = timeSince == 1 ? " min " : " mins ";
-        } else if (secondsPast < 86400) {
+        } else if (secondsPast < 86400 && secondsPast >= 0) {
             timeSince = Math.round(secondsPast / 3600);
             units = timeSince == 1 ? " hour " : " hours ";
-        } else if (secondsPast < 604800) {
+        } else if (secondsPast < 604800 && secondsPast >= 0) {
             timeSince = Math.round(secondsPast / 86400);
             units = timeSince == 1 ? " day " : " days ";
         } else {
