@@ -10,18 +10,19 @@
 
         <TextView
             android:id="@+id/announcement_view_title"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textSize="32sp"
             android:minLines="1"
             android:maxLines="2"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             android:layout_margin="@dimen/text_margin" />
 
         <TextView
             android:id="@+id/announcement_view_timestamp"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textColor="#888888"
             android:textSize="16sp"
@@ -29,17 +30,19 @@
             android:maxLines="2"
             app:layout_constraintTop_toBottomOf="@id/announcement_view_title"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             android:layout_margin="@dimen/text_margin" />
 
         <TextView
             android:id="@+id/announcement_view_contents"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textSize="18sp"
             android:minLines="1"
             android:maxLines="2"
             app:layout_constraintTop_toBottomOf="@id/announcement_view_timestamp"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             android:layout_margin="@dimen/text_margin" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
