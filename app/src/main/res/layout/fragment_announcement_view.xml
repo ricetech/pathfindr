@@ -39,7 +39,6 @@
             android:layout_height="wrap_content"
             android:textSize="18sp"
             android:minLines="1"
-            android:maxLines="2"
             app:layout_constraintTop_toBottomOf="@id/announcement_view_timestamp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
