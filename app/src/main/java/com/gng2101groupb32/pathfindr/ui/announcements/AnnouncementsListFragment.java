@@ -71,7 +71,7 @@ public class AnnouncementsListFragment extends Fragment implements Announcements
             Announcement.getLiveAnnouncements((announcements, error) -> recyclerView.setAdapter(
                     new AnnouncementsListAdapter(announcements, this)));
             // Add Dividers
-            recyclerView.addItemDecoration(new DividerItemDecoration(getContext(),
+            recyclerView.addItemDecoration(new DividerItemDecoration(requireContext(),
                                                                      DividerItemDecoration.VERTICAL));
         }
 
