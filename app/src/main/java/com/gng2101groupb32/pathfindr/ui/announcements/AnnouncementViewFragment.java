@@ -44,7 +44,7 @@ public class AnnouncementViewFragment extends Fragment {
 
         this.annNameTV.setText(this.announcement.getTitle());
         this.annTimestampTV.setText(DBUtils.timeSince(this.announcement.getTimestamp().toDate()));
-        this.annContentsTV.setText(this.announcement.getContent());
+        this.annContentsTV.setText(this.announcement.getContents());
 
         return view;
     }

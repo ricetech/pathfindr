@@ -17,7 +17,7 @@ public class Announcement implements FireStoreDoc {
     private static final String ANNOUNCEMENTS_COLLECTION_NAME = "announcements";
 
     private String title;
-    private String content;
+    private String contents;
     // id is used to store the document id clientside and should not be synced to FireStore.
     @Exclude
     private String id;
@@ -27,9 +27,9 @@ public class Announcement implements FireStoreDoc {
     public Announcement() {
     }
 
-    public Announcement(String title, String content) {
+    public Announcement(String title, String contents) {
         this.title = title;
-        this.content = content;
+        this.contents = contents;
     }
 
     /**
@@ -60,12 +60,12 @@ public class Announcement implements FireStoreDoc {
         this.title = title;
     }
 
-    public String getContent() {
-        return content;
+    public String getContents() {
+        return contents;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public void setContents(String contents) {
+        this.contents = contents;
     }
 
     public String getId() {
@@ -87,7 +87,7 @@ public class Announcement implements FireStoreDoc {
     @NonNull
     @Override
     public String toString() {
-        return "ID: " + this.id + ", TITLE: " + this.title + ", CONTENT: " + this.content +
+        return "ID: " + this.id + ", TITLE: " + this.title + ", CONTENT: " + this.contents +
                 ", TIMESTAMP: " + this.timestamp.toString();
     }
 }
