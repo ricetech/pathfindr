@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelStoreOwner;
+import androidx.navigation.NavDirections;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -20,7 +22,7 @@ import com.gng2101groupb32.pathfindr.db.Announcement;
 /**
  * A fragment representing a list of Items.
  */
-public class AnnouncementsListFragment extends Fragment {
+public class AnnouncementsListFragment extends Fragment implements AnnouncementsListener {
     private static final String ARG_COLUMN_COUNT = "column-count";
     private int mColumnCount = 1;
 
@@ -66,7 +68,8 @@ public class AnnouncementsListFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            Announcement.getLiveAnnouncements((announcements, error) -> recyclerView.setAdapter(new AnnouncementsListAdapter(announcements)));
+            Announcement.getLiveAnnouncements((announcements, error) -> recyclerView.setAdapter(
+                    new AnnouncementsListAdapter(announcements, this)));
             // Add Dividers
             recyclerView.addItemDecoration(new DividerItemDecoration(getContext(),
                                                                      DividerItemDecoration.VERTICAL));
@@ -77,5 +80,21 @@ public class AnnouncementsListFragment extends Fragment {
                 .get(AnnouncementsViewModel.class);
 
         return view;
+    }
+
+    @Override
+    public void onAnnouncementClick(Announcement announcement) {
+        // Set selected announcement
+        viewModel.select(announcement);
+
+        // Go to fragment
+        NavDirections directions = AnnouncementsListFragmentDirections
+                .actionNavigationAnnouncementsToAnnouncementViewFragment();
+        Navigation.findNavController(requireView()).navigate(directions);
+    }
+
+    @Override
+    public void onAnnouncementDelete(Announcement announcement) {
+
     }
 }
