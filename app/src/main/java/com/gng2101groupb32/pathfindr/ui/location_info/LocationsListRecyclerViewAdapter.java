@@ -3,6 +3,7 @@ package com.gng2101groupb32.pathfindr.ui.location_info;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -12,6 +13,7 @@ import com.gng2101groupb32.pathfindr.db.Location;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.lang.ref.WeakReference;
 import java.util.Collections;
 import java.util.List;
 
@@ -36,7 +38,7 @@ public class LocationsListRecyclerViewAdapter extends RecyclerView.Adapter<Locat
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                                   .inflate(R.layout.fragment_locations_list_item, parent, false);
-        return new ViewHolder(view);
+        return new ViewHolder(view, listener);
     }
 
     @Override
@@ -52,17 +54,32 @@ public class LocationsListRecyclerViewAdapter extends RecyclerView.Adapter<Locat
         return locations.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    @SuppressWarnings("FieldCanBeLocal")
+    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public final View mView;
         public final TextView nameTV;
         public final TextView descriptionTV;
+
+        private final Button btnOpen;
+        private final WeakReference<LocationsListener> listenerRef;
+
         public Location location;
 
-        public ViewHolder(View view) {
+        public ViewHolder(View view, LocationsListener listener) {
             super(view);
             mView = view;
             nameTV = (TextView) view.findViewById(R.id.location_name);
             descriptionTV = (TextView) view.findViewById(R.id.location_description);
+
+            btnOpen = this.mView.findViewById(R.id.location_open);
+            btnOpen.setOnClickListener(this);
+
+            listenerRef = new WeakReference<>(listener);
+        }
+
+        @Override
+        public void onClick(View view) {
+            listenerRef.get().onLocationClick(location);
         }
 
         @NotNull

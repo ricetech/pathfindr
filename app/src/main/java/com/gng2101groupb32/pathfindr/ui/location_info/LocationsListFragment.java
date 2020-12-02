@@ -7,6 +7,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelStoreOwner;
+import androidx.navigation.NavDirections;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -20,10 +24,10 @@ import com.gng2101groupb32.pathfindr.db.Location;
  */
 public class LocationsListFragment extends Fragment implements LocationsListener {
 
-    // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
-    // TODO: Customize parameters
     private int mColumnCount = 1;
+
+    private LocationViewModel viewModel;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the fragment (e.g. upon
@@ -32,7 +36,6 @@ public class LocationsListFragment extends Fragment implements LocationsListener
     public LocationsListFragment() {
     }
 
-    // TODO: Customize parameter initialization
     public static LocationsListFragment newInstance(int columnCount) {
         LocationsListFragment fragment = new LocationsListFragment();
         Bundle args = new Bundle();
@@ -71,12 +74,22 @@ public class LocationsListFragment extends Fragment implements LocationsListener
             recyclerView.addItemDecoration(new DividerItemDecoration(requireContext(),
                                                                      DividerItemDecoration.VERTICAL));
         }
+        // Init ViewModel
+        viewModel = new ViewModelProvider((ViewModelStoreOwner) requireActivity())
+                .get(LocationViewModel.class);
+
         return view;
     }
 
     @Override
     public void onLocationClick(Location location) {
+        // Set selected Location
+        viewModel.select(location);
 
+        // Navigate to fragment
+        NavDirections directions = LocationsListFragmentDirections
+                .actionNavigationLocListToLocationViewFragment();
+        Navigation.findNavController(requireView()).navigate(directions);
     }
 
     @Override
