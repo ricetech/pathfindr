@@ -68,6 +68,7 @@ public class Announcement implements FireStoreDoc {
         this.contents = contents;
     }
 
+    @Exclude
     public String getId() {
         return id;
     }
