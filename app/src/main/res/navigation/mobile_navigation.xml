@@ -44,7 +44,11 @@
         android:id="@+id/navigation_loc_list"
         android:name="com.gng2101groupb32.pathfindr.ui.location_info.LocationsListFragment"
         android:label="@string/title_location_info"
-        tools:layout="@layout/fragment_locations_list" />
+        tools:layout="@layout/fragment_locations_list">
+        <action
+            android:id="@+id/action_navigation_loc_list_to_locationViewFragment"
+            app:destination="@id/locationViewFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_settings"
@@ -55,4 +59,8 @@
         android:id="@+id/announcementViewFragment"
         android:name="com.gng2101groupb32.pathfindr.ui.announcements.AnnouncementViewFragment"
         android:label="@string/title_ann_view" />
+    <fragment
+        android:id="@+id/locationViewFragment"
+        android:name="com.gng2101groupb32.pathfindr.LocationViewFragment"
+        android:label="LocationViewFragment" />
 </navigation>
