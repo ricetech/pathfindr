@@ -38,7 +38,11 @@
         android:id="@+id/navigation_nav_list"
         android:name="com.gng2101groupb32.pathfindr.ui.navigate.NavigateDestinationListFragment"
         android:label="@string/title_navigate_list"
-        tools:layout="@layout/fragment_navigate_destination_list" />
+        tools:layout="@layout/fragment_navigate_destination_list">
+        <action
+            android:id="@+id/action_navigation_nav_list_to_locationViewFragment"
+            app:destination="@id/locationViewFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_loc_list"
