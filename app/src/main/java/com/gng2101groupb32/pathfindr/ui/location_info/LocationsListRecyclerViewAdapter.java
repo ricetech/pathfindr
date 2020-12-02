@@ -17,12 +17,6 @@ import java.lang.ref.WeakReference;
 import java.util.Collections;
 import java.util.List;
 
-interface LocationsListener {
-    void onLocationClick(Location location);
-
-    void onLocationDelete(Location location);
-}
-
 public class LocationsListRecyclerViewAdapter extends RecyclerView.Adapter<LocationsListRecyclerViewAdapter.ViewHolder> {
 
     private final List<Location> locations;
