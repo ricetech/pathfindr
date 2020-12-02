@@ -14,7 +14,7 @@ import com.google.firebase.firestore.ServerTimestamp;
 import java.util.List;
 
 public class Announcement implements FireStoreDoc {
-    private static final String ANNOUNCEMENTS_COLLECTION_NAME = "announcements";
+    private static final String COLLECTION_NAME = "announcements";
 
     private String title;
     private String contents;
@@ -45,11 +45,11 @@ public class Announcement implements FireStoreDoc {
                                            OnSuccessListener<List<Announcement>> successListener,
                                            OnFailureListener failureListener) {
         DBUtils.getCollection(currentActivity, successListener, failureListener,
-                ANNOUNCEMENTS_COLLECTION_NAME, Announcement.class);
+                              COLLECTION_NAME, Announcement.class);
     }
 
     public static void getLiveAnnouncements(EventListener<List<Announcement>> eventListener) {
-        DBUtils.getLiveCollection(eventListener, ANNOUNCEMENTS_COLLECTION_NAME, Announcement.class);
+        DBUtils.getLiveCollection(eventListener, COLLECTION_NAME, Announcement.class);
     }
 
     public String getTitle() {
