@@ -8,6 +8,7 @@
     android:layout_height="match_parent"
     android:layout_marginLeft="16dp"
     android:layout_marginRight="16dp"
+    android:paddingBottom="75dp"
     app:layoutManager="LinearLayoutManager"
     tools:context=".ui.announcements.AnnouncementsListFragment"
     tools:listitem="@layout/fragment_announcement_list_item" />
