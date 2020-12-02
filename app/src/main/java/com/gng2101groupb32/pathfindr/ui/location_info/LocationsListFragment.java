@@ -2,23 +2,23 @@ package com.gng2101groupb32.pathfindr.ui.location_info;
 
 import android.content.Context;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.gng2101groupb32.pathfindr.R;
-import com.gng2101groupb32.pathfindr.dummy.DummyContent;
+import com.gng2101groupb32.pathfindr.db.Location;
 
 /**
  * A fragment representing a list of Items.
  */
-public class LocationsListFragment extends Fragment {
+public class LocationsListFragment extends Fragment implements LocationsListener {
 
     // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
@@ -26,8 +26,8 @@ public class LocationsListFragment extends Fragment {
     private int mColumnCount = 1;
 
     /**
-     * Mandatory empty constructor for the fragment manager to instantiate the
-     * fragment (e.g. upon screen orientation changes).
+     * Mandatory empty constructor for the fragment manager to instantiate the fragment (e.g. upon
+     * screen orientation changes).
      */
     public LocationsListFragment() {
     }
@@ -64,8 +64,23 @@ public class LocationsListFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new LocationsListRecyclerViewAdapter(DummyContent.ITEMS));
+            Location.getLiveLocations((locations, error) -> recyclerView.setAdapter(
+                    new LocationsListRecyclerViewAdapter(locations, this)
+            ));
+            // Add Dividers
+            recyclerView.addItemDecoration(new DividerItemDecoration(requireContext(),
+                                                                     DividerItemDecoration.VERTICAL));
         }
         return view;
+    }
+
+    @Override
+    public void onLocationClick(Location location) {
+
+    }
+
+    @Override
+    public void onLocationDelete(Location location) {
+
     }
 }

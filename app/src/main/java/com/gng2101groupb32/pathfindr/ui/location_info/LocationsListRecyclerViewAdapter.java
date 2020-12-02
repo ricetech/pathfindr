@@ -1,68 +1,74 @@
 package com.gng2101groupb32.pathfindr.ui.location_info;
 
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.gng2101groupb32.pathfindr.R;
-import com.gng2101groupb32.pathfindr.dummy.DummyContent.DummyItem;
+import com.gng2101groupb32.pathfindr.db.Location;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Collections;
 import java.util.List;
 
-/**
- * {@link RecyclerView.Adapter} that can display a {@link DummyItem}.
- * TODO: Replace the implementation with code for your data type.
- */
+interface LocationsListener {
+    void onLocationClick(Location location);
+
+    void onLocationDelete(Location location);
+}
+
 public class LocationsListRecyclerViewAdapter extends RecyclerView.Adapter<LocationsListRecyclerViewAdapter.ViewHolder> {
 
-    private final List<DummyItem> mValues;
+    private final List<Location> locations;
+    private final LocationsListener listener;
 
-    public LocationsListRecyclerViewAdapter(List<DummyItem> items) {
-        mValues = items;
+    public LocationsListRecyclerViewAdapter(List<Location> locations, LocationsListener listener) {
+        this.locations = locations;
+        this.listener = listener;
     }
 
     @NotNull
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.fragment_locations_list_item, parent, false);
+                                  .inflate(R.layout.fragment_locations_list_item, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        holder.mItem = mValues.get(position);
-        holder.mIdView.setText(mValues.get(position).id);
-        holder.mContentView.setText(mValues.get(position).content);
+        Collections.sort(locations, (loc1, loc2) -> loc1.getName().compareTo(loc2.getName()));
+        holder.location = locations.get(position);
+        holder.nameTV.setText(locations.get(position).getName());
+        holder.descriptionTV.setText(locations.get(position).getDescription());
     }
 
     @Override
     public int getItemCount() {
-        return mValues.size();
+        return locations.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
-        public final TextView mIdView;
-        public final TextView mContentView;
-        public DummyItem mItem;
+        public final TextView nameTV;
+        public final TextView descriptionTV;
+        public Location location;
 
         public ViewHolder(View view) {
             super(view);
             mView = view;
-            mIdView = (TextView) view.findViewById(R.id.item_number);
-            mContentView = (TextView) view.findViewById(R.id.content);
+            nameTV = (TextView) view.findViewById(R.id.location_name);
+            descriptionTV = (TextView) view.findViewById(R.id.location_description);
         }
 
         @NotNull
         @Override
         public String toString() {
-            return super.toString() + " '" + mContentView.getText() + "'";
+            return super.toString() + " '" + descriptionTV.getText() + "'";
         }
     }
 }
