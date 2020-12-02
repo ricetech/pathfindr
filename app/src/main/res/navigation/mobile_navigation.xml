@@ -62,5 +62,5 @@
     <fragment
         android:id="@+id/locationViewFragment"
         android:name="com.gng2101groupb32.pathfindr.LocationViewFragment"
-        android:label="LocationViewFragment" />
+        android:label="@string/title_location_view" />
 </navigation>
