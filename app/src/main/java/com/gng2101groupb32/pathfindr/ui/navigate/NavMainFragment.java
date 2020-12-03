@@ -41,7 +41,7 @@ public class NavMainFragment extends Fragment implements BeaconConsumer {
     public static final String TAG = "NavMainFragment";
     private BeaconManager beaconManager;
     private List<PathfindrBeacon> pBeacons = new ArrayList<>();
-    private HashMap<String, Integer> beaconRSSIMap = new HashMap<>();
+    private final HashMap<String, Integer> beaconRSSIMap = new HashMap<>();
     private LocationViewModel locViewModel;
 
     public NavMainFragment() {
