@@ -63,6 +63,7 @@ public class NavMainFragment extends Fragment implements BeaconConsumer {
 
     // Loading UI
     private ProgressBar progressBarLoading;
+    private TextView tvLoading;
 
     // Nav UI
     private ProgressBar progressBarNav;
@@ -136,6 +137,7 @@ public class NavMainFragment extends Fragment implements BeaconConsumer {
 
         // Loading UI
         progressBarLoading = view.findViewById(R.id.nav_main_loading_bar);
+        tvLoading = view.findViewById(R.id.nav_main_loading_text);
 
         // Nav UI
         progressBarNav = view.findViewById(R.id.nav_main_progress_bar);
