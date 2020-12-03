@@ -46,7 +46,9 @@ import java.util.List;
  */
 @SuppressWarnings("FieldCanBeLocal")
 public class NavMainFragment extends Fragment implements BeaconConsumer {
+    public static final int DEFAULT_RSSI = -1000;
     public static final String TAG = "NavMainFragment";
+
     private BeaconManager beaconManager;
     private List<PathfindrBeacon> pBeacons = new ArrayList<>();
     private final HashMap<String, Integer> beaconRSSIMap = new HashMap<>();
@@ -106,7 +108,7 @@ public class NavMainFragment extends Fragment implements BeaconConsumer {
             pBeacons = pathfindrBeacons;
             for (PathfindrBeacon beacon : pBeacons) {
                 String uuid = beacon.getId();
-                beaconRSSIMap.put(uuid, -1000);
+                beaconRSSIMap.put(uuid, DEFAULT_RSSI);
             }
         };
         OnFailureListener beaconOnFailureListener = e -> {
