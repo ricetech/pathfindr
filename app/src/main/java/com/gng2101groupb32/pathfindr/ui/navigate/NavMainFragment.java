@@ -52,8 +52,8 @@ public class NavMainFragment extends Fragment implements BeaconConsumer {
     public static final int RSSI_THRESHOLD = -80;
     public static final String TAG = "NavMainFragment";
 
-    private BeaconManager beaconManager;
     private final HashMap<String, Integer> beaconRSSIMap = new HashMap<>();
+    private BeaconManager beaconManager;
     private LocationViewModel locViewModel;
 
     // Current Destination
@@ -100,6 +100,14 @@ public class NavMainFragment extends Fragment implements BeaconConsumer {
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
+    }
+
+    private static <T, E> Set<T> getKeysByValue(Map<T, E> map, E value) {
+        return map.entrySet()
+                  .stream()
+                  .filter(entry -> Objects.equals(entry.getValue(), value))
+                  .map(Map.Entry::getKey)
+                  .collect(Collectors.toSet());
     }
 
     @Override
