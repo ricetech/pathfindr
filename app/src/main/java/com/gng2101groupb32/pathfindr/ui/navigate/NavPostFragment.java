@@ -7,9 +7,12 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.activity.OnBackPressedCallback;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelStoreOwner;
+import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import com.gng2101groupb32.pathfindr.R;
@@ -54,15 +57,25 @@ public class NavPostFragment extends Fragment {
         TextView tvHeader = view.findViewById(R.id.nav_post_header);
         tvHeader.setText(getString(R.string.nav_post_text_header, location.getName()));
 
+        return view;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        NavController navController = Navigation.findNavController(view);
+
         OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
             @Override
             public void handleOnBackPressed() {
                 // Handle the back button event
-                Navigation.findNavController(view).navigate(NavPostFragmentDirections.actionNavPostFragmentToNavigationHome());
+                navController.navigate(NavPostFragmentDirections.actionNavPostFragmentToNavigationHome());
             }
         };
         requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), callback);
 
-        return view;
+        // Connect Exit button
+        view.findViewById(R.id.nav_post_exit).setOnClickListener(view1 -> navController
+                .navigate(NavPostFragmentDirections.actionNavPostFragmentToNavigationHome()));
     }
 }
