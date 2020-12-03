@@ -14,7 +14,6 @@ import com.gng2101groupb32.pathfindr.db.Location;
 import org.jetbrains.annotations.NotNull;
 
 import java.lang.ref.WeakReference;
-import java.util.Collections;
 import java.util.List;
 
 public class LocationsListRecyclerViewAdapter extends RecyclerView.Adapter<LocationsListRecyclerViewAdapter.ViewHolder> {
@@ -37,7 +36,7 @@ public class LocationsListRecyclerViewAdapter extends RecyclerView.Adapter<Locat
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        Collections.sort(locations, (loc1, loc2) -> loc1.getName().compareTo(loc2.getName()));
+        locations.sort((loc1, loc2) -> loc1.getName().compareTo(loc2.getName()));
         holder.location = locations.get(position);
         holder.nameTV.setText(locations.get(position).getName());
         holder.descriptionTV.setText(locations.get(position).getDescription());

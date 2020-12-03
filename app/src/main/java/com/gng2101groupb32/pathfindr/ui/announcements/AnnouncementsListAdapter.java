@@ -15,7 +15,6 @@ import com.gng2101groupb32.pathfindr.db.DBUtils;
 import org.jetbrains.annotations.NotNull;
 
 import java.lang.ref.WeakReference;
-import java.util.Collections;
 import java.util.List;
 
 interface AnnouncementsListener {
@@ -48,7 +47,7 @@ public class AnnouncementsListAdapter extends RecyclerView.Adapter<Announcements
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        Collections.sort(mValues, (a1, a2) -> a2.getTimestamp().compareTo(a1.getTimestamp()));
+        mValues.sort((a1, a2) -> a2.getTimestamp().compareTo(a1.getTimestamp()));
         holder.announcement = mValues.get(position);
         holder.nameTV.setText(mValues.get(position).getTitle());
         holder.timeframeTV.setText(DBUtils.timeSince(mValues.get(position).getTimestamp().toDate()));

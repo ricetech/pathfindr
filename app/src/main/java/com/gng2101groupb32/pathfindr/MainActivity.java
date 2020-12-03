@@ -2,16 +2,16 @@ package com.gng2101groupb32.pathfindr;
 
 import android.os.Bundle;
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
 public class MainActivity extends AppCompatActivity {
-    AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
+    final AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
             R.id.navigation_home, R.id.navigation_settings, R.id.navigation_announcements,
             R.id.navigation_nav_list, R.id.navigation_loc_list)
             .build();

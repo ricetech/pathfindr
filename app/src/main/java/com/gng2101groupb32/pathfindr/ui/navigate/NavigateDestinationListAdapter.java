@@ -16,7 +16,6 @@ import com.gng2101groupb32.pathfindr.ui.location_info.NavigateListener;
 import org.jetbrains.annotations.NotNull;
 
 import java.lang.ref.WeakReference;
-import java.util.Collections;
 import java.util.List;
 
 public class NavigateDestinationListAdapter extends RecyclerView.Adapter<NavigateDestinationListAdapter.ViewHolder> {
@@ -41,7 +40,7 @@ public class NavigateDestinationListAdapter extends RecyclerView.Adapter<Navigat
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        Collections.sort(locations, (loc1, loc2) -> loc1.getName().compareTo(loc2.getName()));
+        locations.sort((loc1, loc2) -> loc1.getName().compareTo(loc2.getName()));
         holder.location = locations.get(position);
         holder.nameTV.setText(locations.get(position).getName());
         holder.descriptionTV.setText(locations.get(position).getDescription());
