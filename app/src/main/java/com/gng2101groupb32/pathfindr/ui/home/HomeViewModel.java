@@ -10,8 +10,9 @@ public class HomeViewModel extends ViewModel {
 
     public HomeViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("Welcome to Pathfindr!\n\nThis app is a work in progress.\nPlease " +
-                "explore the app using the buttons below.");
+        mText.setValue("Welcome to Pathfindr!\n\nPlease " +
+                               "explore the app using the buttons below, or by using the navigation bar at the " +
+                               "bottom of the screen.");
     }
 
     public LiveData<String> getText() {
