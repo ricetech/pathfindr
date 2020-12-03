@@ -10,7 +10,7 @@ import com.google.firebase.firestore.Exclude;
 
 import java.util.List;
 
-public class Beacon implements FireStoreDoc {
+public class PathfindrBeacon implements FireStoreDoc {
     public static final String COLLECTION_NAME = "beacons";
 
     @Exclude
@@ -19,10 +19,10 @@ public class Beacon implements FireStoreDoc {
     private String name;
     private String internalName;
 
-    public Beacon() {
+    public PathfindrBeacon() {
     }
 
-    public Beacon(String name, String internalName) {
+    public PathfindrBeacon(String name, String internalName) {
         this.name = name;
         this.internalName = internalName;
     }
@@ -33,23 +33,23 @@ public class Beacon implements FireStoreDoc {
 
     public static void getBeacon(
             Activity currentActivity,
-            final OnSuccessListener<Beacon> successListener,
+            final OnSuccessListener<PathfindrBeacon> successListener,
             final OnFailureListener failureListener,
             DocumentReference docRef) {
-        DBUtils.getDoc(currentActivity, successListener, failureListener, docRef, Beacon.class);
+        DBUtils.getDoc(currentActivity, successListener, failureListener, docRef, PathfindrBeacon.class);
     }
 
     public static void getBeacon(
             Activity currentActivity,
-            final OnSuccessListener<Beacon> successListener,
+            final OnSuccessListener<PathfindrBeacon> successListener,
             final OnFailureListener failureListener,
             String id) {
         DocumentReference docRef = getRef(id);
         getBeacon(currentActivity, successListener, failureListener, docRef);
     }
 
-    public static void getLiveBeacons(EventListener<List<Beacon>> eventListener) {
-        DBUtils.getLiveCollection(eventListener, COLLECTION_NAME, Beacon.class);
+    public static void getLiveBeacons(EventListener<List<PathfindrBeacon>> eventListener) {
+        DBUtils.getLiveCollection(eventListener, COLLECTION_NAME, PathfindrBeacon.class);
     }
 
     @Exclude
