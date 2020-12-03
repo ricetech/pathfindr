@@ -138,9 +138,7 @@ public class NavMainFragment extends Fragment implements BeaconConsumer {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        tts = new TextToSpeech(requireContext(), status -> {
-            tts.setLanguage(Locale.US);
-        });
+        tts = new TextToSpeech(requireContext(), status -> tts.setLanguage(Locale.US));
 
         vibrator = (Vibrator) requireContext().getSystemService(Context.VIBRATOR_SERVICE);
     }
