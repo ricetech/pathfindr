@@ -48,6 +48,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -383,7 +384,11 @@ public class NavMainFragment extends Fragment implements BeaconConsumer {
     }
 
     private void findClosestBeacon() {
-        int maxRSSI = Collections.max(beaconRSSIMap.values());
+        int maxRSSI = DEFAULT_RSSI;
+        try {
+            maxRSSI = Collections.max(beaconRSSIMap.values());
+        } catch (NoSuchElementException ignored) {
+        }
         if (maxRSSI >= RSSI_THRESHOLD) {
             Set<String> closestBeacons = getKeysByValue(beaconRSSIMap, maxRSSI);
             if (closestBeacons.size() == 1) {
