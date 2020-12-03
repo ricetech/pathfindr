@@ -2,7 +2,6 @@ package com.gng2101groupb32.pathfindr.ui.navigate;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -90,7 +89,8 @@ public class NavigateDestinationListFragment extends Fragment implements Locatio
         viewModel.select(location);
 
         // Navigate to fragment
-        NavDirections directions = NavigateDestinationListFragmentDirections.actionNavigationNavListToLocationViewFragment();
+        NavDirections directions = NavigateDestinationListFragmentDirections
+                .actionNavigationNavListToLocationViewFragment();
         Navigation.findNavController(requireView()).navigate(directions);
     }
 
@@ -105,6 +105,8 @@ public class NavigateDestinationListFragment extends Fragment implements Locatio
         viewModel.select(location);
 
         // Navigate to fragment
-        Log.d("LLF", "onLocationNavigateSelect: gotem");
+        NavDirections directions = NavigateDestinationListFragmentDirections
+                .actionNavigationNavListToNavPrepFragment();
+        Navigation.findNavController(requireView()).navigate(directions);
     }
 }

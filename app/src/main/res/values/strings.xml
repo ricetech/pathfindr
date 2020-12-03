@@ -29,4 +29,8 @@
     <string name="title_location_view">Location View</string>
     <string name="button_info">Info</string>
     <string name="button_nav">Navigate</string>
+    <string name="nav_prep_body">"Please read carefully.\nYou must press 'Next' ONLY once you are within 3 metres of a designated location that is listed in the Location Info page.
+Trying to start navigation while not at a designated location will not work."</string>
+    <string name="title_nav_prep">Instructions - Read Carefully</string>
+    <string name="next">Next</string>
 </resources>

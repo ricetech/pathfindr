@@ -42,6 +42,9 @@
         <action
             android:id="@+id/action_navigation_nav_list_to_locationViewFragment"
             app:destination="@id/locationViewFragment" />
+        <action
+            android:id="@+id/action_navigation_nav_list_to_navPrepFragment"
+            app:destination="@id/navPrepFragment" />
     </fragment>
 
     <fragment
@@ -67,4 +70,9 @@
         android:id="@+id/locationViewFragment"
         android:name="com.gng2101groupb32.pathfindr.LocationViewFragment"
         android:label="@string/title_location_view" />
+    <fragment
+        android:id="@+id/navPrepFragment"
+        android:name="com.gng2101groupb32.pathfindr.ui.navigate.NavPrepFragment"
+        android:label="@string/title_nav_prep"
+        tools:layout="@layout/fragment_nav_prep" />
 </navigation>
