@@ -19,6 +19,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -50,6 +51,8 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
+
+import static android.content.DialogInterface.BUTTON_POSITIVE;
 
 /**
  * A simple {@link Fragment} subclass. Use the {@link NavMainFragment#newInstance} factory method to
@@ -185,6 +188,28 @@ public class NavMainFragment extends Fragment implements BeaconConsumer {
                 "m:2-3=0215,i:4-19,i:20-21,i:22-23,p:24-24"
         ));
         beaconManager.bind(this);
+
+        OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
+            @Override
+            public void handleOnBackPressed() {
+                // Handle the back button event
+                final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(requireContext());
+                alertDialogBuilder.setTitle("Are you sure you want to exit?");
+                alertDialogBuilder.setMessage(
+                        "You will have to restart navigation from the beginning if you exit.");
+                alertDialogBuilder.setPositiveButton(android.R.string.yes, (dialog, which) -> {
+                    if (which == BUTTON_POSITIVE) {
+                        Navigation.findNavController(view)
+                                  .navigate(NavMainFragmentDirections
+                                                    .actionNavMainFragmentToNavigationNavList());
+                    }
+                });
+                alertDialogBuilder.setNegativeButton(android.R.string.cancel, null);
+                alertDialogBuilder.show();
+
+            }
+        };
+        requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), callback);
 
         return view;
     }
