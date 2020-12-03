@@ -384,7 +384,7 @@ public class NavMainFragment extends Fragment implements BeaconConsumer {
     }
 
     private void findClosestBeacon() {
-        int maxRSSI = 0;
+        int maxRSSI = DEFAULT_RSSI;
         try {
             maxRSSI = Collections.max(beaconRSSIMap.values());
         } catch (NoSuchElementException ignored) {
