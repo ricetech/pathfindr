@@ -358,7 +358,7 @@ public class NavMainFragment extends Fragment implements BeaconConsumer {
 
         try {
             beaconManager.startRangingBeaconsInRegion(new Region("myRangingUniqueId", null, null, null));
-        } catch (RemoteException e) {
+        } catch (RemoteException ignored) {
         }
     }
 
