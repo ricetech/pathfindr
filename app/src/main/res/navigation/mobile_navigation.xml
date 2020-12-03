@@ -89,6 +89,9 @@
             app:popUpTo="@+id/navigation_nav_list"
             app:popUpToInclusive="true"
             app:destination="@id/navigation_nav_list" />
+        <action
+            android:id="@+id/action_navMainFragment_to_navPostFragment"
+            app:destination="@id/navPostFragment" />
     </fragment>
     <fragment
         android:id="@+id/navPostFragment"

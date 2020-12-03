@@ -20,10 +20,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelStoreOwner;
+import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import com.gng2101groupb32.pathfindr.R;
@@ -98,6 +101,9 @@ public class NavMainFragment extends Fragment implements BeaconConsumer {
 
     // Vibration
     private Vibrator vibrator;
+
+    // Navigation Controller
+    private NavController navController;
 
     public NavMainFragment() {
         // Required empty public constructor
@@ -179,6 +185,7 @@ public class NavMainFragment extends Fragment implements BeaconConsumer {
                 "m:2-3=0215,i:4-19,i:20-21,i:22-23,p:24-24"
         ));
         beaconManager.bind(this);
+
         return view;
     }
 
@@ -316,7 +323,10 @@ public class NavMainFragment extends Fragment implements BeaconConsumer {
                     }
                 }
             } else {
-                Log.i(TAG, "Done");
+                // Destination Reached
+                if (navController.getCurrentDestination().getId() == R.id.navMainFragment) {
+                    navController.navigate(NavMainFragmentDirections.actionNavMainFragmentToNavPostFragment());
+                }
             }
         });
 
@@ -339,6 +349,12 @@ public class NavMainFragment extends Fragment implements BeaconConsumer {
     @Override
     public boolean bindService(Intent intent, ServiceConnection serviceConnection, int i) {
         return false;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        navController = Navigation.findNavController(requireView());
     }
 
     private void findClosestBeacon() {
