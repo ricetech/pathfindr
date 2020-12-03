@@ -97,5 +97,9 @@
         android:id="@+id/navPostFragment"
         android:name="com.gng2101groupb32.pathfindr.ui.navigate.NavPostFragment"
         android:label="@string/title_nav_post"
-        tools:layout="@layout/fragment_nav_post" />
+        tools:layout="@layout/fragment_nav_post">
+        <action
+            android:id="@+id/action_navPostFragment_to_navigation_home"
+            app:destination="@id/navigation_home" />
+    </fragment>
 </navigation>

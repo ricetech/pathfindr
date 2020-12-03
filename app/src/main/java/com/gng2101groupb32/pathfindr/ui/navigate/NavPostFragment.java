@@ -6,9 +6,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelStoreOwner;
+import androidx.navigation.Navigation;
 
 import com.gng2101groupb32.pathfindr.R;
 import com.gng2101groupb32.pathfindr.db.Location;
@@ -51,6 +53,15 @@ public class NavPostFragment extends Fragment {
         // Update UI
         TextView tvHeader = view.findViewById(R.id.nav_post_header);
         tvHeader.setText(getString(R.string.nav_post_text_header, location.getName()));
+
+        OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
+            @Override
+            public void handleOnBackPressed() {
+                // Handle the back button event
+                Navigation.findNavController(view).navigate(NavPostFragmentDirections.actionNavPostFragmentToNavigationHome());
+            }
+        };
+        requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), callback);
 
         return view;
     }
