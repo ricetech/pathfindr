@@ -1,6 +1,7 @@
 package com.gng2101groupb32.pathfindr.ui.navigate;
 
 import android.animation.ObjectAnimator;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
@@ -261,6 +262,14 @@ public class NavMainFragment extends Fragment implements BeaconConsumer {
                                   .setDuration(300).start();
                     // Update TextViews
                     tvSummary.setText(currentInstruction.getSummary());
+                    // Update Button OnClickListener
+                    btnText.setOnClickListener(view -> {
+                        final AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
+                        builder.setTitle(currentInstruction.getSummary());
+                        builder.setMessage(currentInstruction.getVerbose());
+                        builder.setPositiveButton(android.R.string.ok, null);
+                        builder.show();
+                    });
                     // Update Icon
                     @DrawableRes int imgDrawable = R.drawable.ic_baseline_navigation_24;
                     double rotation = 0;
