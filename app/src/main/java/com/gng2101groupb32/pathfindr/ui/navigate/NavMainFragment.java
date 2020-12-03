@@ -16,6 +16,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.DrawableRes;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
@@ -116,12 +117,6 @@ public class NavMainFragment extends Fragment implements BeaconConsumer {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // Beacon Initialization
-        beaconManager = BeaconManager.getInstanceForApplication(requireContext());
-        beaconManager.getBeaconParsers().add(new BeaconParser().setBeaconLayout(
-                "m:2-3=0215,i:4-19,i:20-21,i:22-23,p:24-24"
-        ));
-        beaconManager.bind(this);
     }
 
     @Override
@@ -161,6 +156,13 @@ public class NavMainFragment extends Fragment implements BeaconConsumer {
 
         // Set UI elements that can be set right now
         tvDestination.setText(location.getName());
+
+        // Beacon Initialization
+        beaconManager = BeaconManager.getInstanceForApplication(requireContext());
+        beaconManager.getBeaconParsers().add(new BeaconParser().setBeaconLayout(
+                "m:2-3=0215,i:4-19,i:20-21,i:22-23,p:24-24"
+        ));
+        beaconManager.bind(this);
         return view;
     }
 
@@ -259,6 +261,25 @@ public class NavMainFragment extends Fragment implements BeaconConsumer {
                                   .setDuration(300).start();
                     // Update TextViews
                     tvSummary.setText(currentInstruction.getSummary());
+                    // Update Icon
+                    @DrawableRes int imgDrawable = R.drawable.ic_baseline_navigation_24;
+                    double rotation = 0;
+                    switch (currentInstruction.getIcon()) {
+                        case STRAIGHT:
+                            imgDrawable = R.drawable.ic_baseline_arrow_upward_24;
+                            rotation = currentInstruction.getAngle();
+                            break;
+                        case T_LEFT:
+                            imgDrawable = R.drawable.ic_baseline_turn_left_rot_180_24;
+                            rotation = 180;
+                            break;
+                        case T_RIGHT:
+                            imgDrawable = R.drawable.ic_baseline_turn_right_rot_180_24;
+                            rotation = 180;
+                            break;
+                    }
+                    ivNavIcon.setImageResource(imgDrawable);
+                    ivNavIcon.setRotation((float) rotation);
                 }
             } else {
                 Log.i(TAG, "Done");
