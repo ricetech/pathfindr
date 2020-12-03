@@ -2,6 +2,7 @@ package com.gng2101groupb32.pathfindr.ui.navigate;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,11 +21,12 @@ import com.gng2101groupb32.pathfindr.R;
 import com.gng2101groupb32.pathfindr.db.Location;
 import com.gng2101groupb32.pathfindr.ui.location_info.LocationViewModel;
 import com.gng2101groupb32.pathfindr.ui.location_info.LocationsListener;
+import com.gng2101groupb32.pathfindr.ui.location_info.NavigateListener;
 
 /**
  * A fragment representing a list of Items.
  */
-public class NavigateDestinationListFragment extends Fragment implements LocationsListener {
+public class NavigateDestinationListFragment extends Fragment implements LocationsListener, NavigateListener {
 
     private static final String ARG_COLUMN_COUNT = "column-count";
     private int mColumnCount = 1;
@@ -70,7 +72,7 @@ public class NavigateDestinationListFragment extends Fragment implements Locatio
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
             Location.getLiveLocations((locations, error) -> recyclerView.setAdapter(
-                    new NavigateDestinationListAdapter(locations, this)
+                    new NavigateDestinationListAdapter(locations, this, this)
             ));
             // Add Dividers
             recyclerView.addItemDecoration(new DividerItemDecoration(requireContext(),
@@ -95,5 +97,14 @@ public class NavigateDestinationListFragment extends Fragment implements Locatio
     @Override
     public void onLocationDelete(Location location) {
 
+    }
+
+    @Override
+    public void onLocationNavigateSelect(Location location) {
+        // Set selected location
+        viewModel.select(location);
+
+        // Navigate to fragment
+        Log.d("LLF", "onLocationNavigateSelect: gotem");
     }
 }

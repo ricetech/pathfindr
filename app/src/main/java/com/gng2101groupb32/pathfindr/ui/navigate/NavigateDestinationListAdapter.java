@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.gng2101groupb32.pathfindr.R;
 import com.gng2101groupb32.pathfindr.db.Location;
 import com.gng2101groupb32.pathfindr.ui.location_info.LocationsListener;
+import com.gng2101groupb32.pathfindr.ui.location_info.NavigateListener;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -20,11 +21,14 @@ import java.util.List;
 
 public class NavigateDestinationListAdapter extends RecyclerView.Adapter<NavigateDestinationListAdapter.ViewHolder> {
     private final List<Location> locations;
-    private final LocationsListener listener;
+    private final LocationsListener locListener;
+    private final NavigateListener navListener;
 
-    public NavigateDestinationListAdapter(List<Location> locations, LocationsListener listener) {
+    public NavigateDestinationListAdapter(List<Location> locations, LocationsListener locListener,
+                                          NavigateListener navListener) {
         this.locations = locations;
-        this.listener = listener;
+        this.locListener = locListener;
+        this.navListener = navListener;
     }
 
     @NotNull
@@ -49,13 +53,16 @@ public class NavigateDestinationListAdapter extends RecyclerView.Adapter<Navigat
     }
 
     @SuppressWarnings("FieldCanBeLocal")
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
         public final TextView nameTV;
         public final TextView descriptionTV;
 
         private final Button btnInfo;
-        private final WeakReference<LocationsListener> listenerRef;
+        private final Button btnNav;
+
+        private final WeakReference<LocationsListener> locationsListener;
+        private final WeakReference<NavigateListener> navigateListener;
 
         public Location location;
 
@@ -65,15 +72,18 @@ public class NavigateDestinationListAdapter extends RecyclerView.Adapter<Navigat
             nameTV = (TextView) view.findViewById(R.id.nav_list_name);
             descriptionTV = (TextView) view.findViewById(R.id.nav_list_description);
 
+            locationsListener = new WeakReference<>(locListener);
+
             btnInfo = this.mView.findViewById(R.id.nav_list_info);
-            btnInfo.setOnClickListener(this);
+            btnInfo.setOnClickListener(v -> locationsListener.get()
+                                                             .onLocationClick(location));
 
-            listenerRef = new WeakReference<>(listener);
-        }
+            navigateListener = new WeakReference<>(navListener);
 
-        @Override
-        public void onClick(View view) {
-            listenerRef.get().onLocationClick(location);
+            btnNav = this.mView.findViewById(R.id.nav_list_nav);
+            btnNav.setOnClickListener(v -> navigateListener.get()
+                                                           .onLocationNavigateSelect(location));
+
         }
 
         @NotNull
