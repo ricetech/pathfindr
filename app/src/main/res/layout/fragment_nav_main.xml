@@ -36,6 +36,7 @@
         android:id="@+id/nav_main_nav"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@id/nav_main_exit"
         app:layout_constraintTop_toBottomOf="@id/nav_main_loading">
 
