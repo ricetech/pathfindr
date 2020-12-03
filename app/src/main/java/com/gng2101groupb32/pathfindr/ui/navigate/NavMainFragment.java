@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.RemoteException;
+import android.os.Vibrator;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -95,6 +96,9 @@ public class NavMainFragment extends Fragment implements BeaconConsumer {
     // TTS
     private TextToSpeech tts;
 
+    // Vibration
+    private Vibrator vibrator;
+
     public NavMainFragment() {
         // Required empty public constructor
     }
@@ -127,6 +131,8 @@ public class NavMainFragment extends Fragment implements BeaconConsumer {
         tts = new TextToSpeech(requireContext(), status -> {
             tts.setLanguage(Locale.US);
         });
+
+        vibrator = (Vibrator) requireContext().getSystemService(Context.VIBRATOR_SERVICE);
     }
 
     @Override
@@ -305,6 +311,7 @@ public class NavMainFragment extends Fragment implements BeaconConsumer {
 
                     // Notify User
                     if (currentInstruction != previousInstruction) {
+                        vibrator.vibrate(500);
                         readTTS();
                     }
                 }
