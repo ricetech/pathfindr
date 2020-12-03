@@ -298,7 +298,9 @@ public class NavMainFragment extends Fragment implements BeaconConsumer {
                 }
             }
             findClosestBeacon();
-            if (!this.closestBeaconId.equals(this.location.getBeacon().getId())) {
+            if (this.closestBeaconId != null && this.location != null &&
+                    this.location.getBeacon() != null &&
+                    !this.closestBeaconId.equals(this.location.getBeacon().getId())) {
                 layoutLoading.setVisibility(View.GONE);
                 Log.i(TAG, closestBeaconId);
                 Instruction previousInstruction = currentInstruction;
