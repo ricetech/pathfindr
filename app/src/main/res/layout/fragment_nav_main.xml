@@ -63,6 +63,16 @@
             app:layout_constraintStart_toEndOf="@id/nav_main_progress_text"
             app:layout_constraintTop_toTopOf="@id/nav_main_progress_text" />
 
+        <Button
+            android:id="@+id/nav_main_exit"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/text_margin"
+            android:text="@string/exit_navigation"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
