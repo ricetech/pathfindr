@@ -25,7 +25,6 @@ import com.gng2101groupb32.pathfindr.R;
 import com.gng2101groupb32.pathfindr.db.Instruction;
 import com.gng2101groupb32.pathfindr.db.Location;
 import com.gng2101groupb32.pathfindr.db.Path;
-import com.gng2101groupb32.pathfindr.db.PathfindrBeacon;
 import com.gng2101groupb32.pathfindr.ui.location_info.LocationViewModel;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -37,10 +36,8 @@ import org.altbeacon.beacon.BeaconParser;
 import org.altbeacon.beacon.RangeNotifier;
 import org.altbeacon.beacon.Region;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass. Use the {@link NavMainFragment#newInstance} factory method to
@@ -52,7 +49,6 @@ public class NavMainFragment extends Fragment implements BeaconConsumer {
     public static final String TAG = "NavMainFragment";
 
     private BeaconManager beaconManager;
-    private List<PathfindrBeacon> pBeacons = new ArrayList<>();
     private final HashMap<String, Integer> beaconRSSIMap = new HashMap<>();
     private LocationViewModel locViewModel;
 
