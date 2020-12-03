@@ -85,13 +85,13 @@ public class DBUtils {
             Activity currentActivity,
             final OnSuccessListener<T> successListener, final OnFailureListener failureListener,
             DocumentReference docRef, final Class<T> outputClass) {
-        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-
-        // Firebase operations are not permitted unless the user is logged in
-        if (currentUser == null) {
-            failureListener.onFailure(new UserNotLoggedInException("User is not logged in"));
-            return;
-        }
+//        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+//
+//        // Firebase operations are not permitted unless the user is logged in
+//        if (currentUser == null) {
+//            failureListener.onFailure(new UserNotLoggedInException("User is not logged in"));
+//            return;
+//        }
 
         docRef.get().addOnSuccessListener(
                 currentActivity,
@@ -261,13 +261,13 @@ public class DBUtils {
             final OnFailureListener failureListener,
             String collectionName, final Class<T> outputClass) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-
-        // Firebase operations are not permitted unless the user is logged in
-        if (currentUser == null) {
-            failureListener.onFailure(new UserNotLoggedInException("User is not logged in"));
-            return;
-        }
+//        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+//
+//        // Firebase operations are not permitted unless the user is logged in
+//        if (currentUser == null) {
+//            failureListener.onFailure(new UserNotLoggedInException("User is not logged in"));
+//            return;
+//        }
 
         // Get Collection from Cloud FireStore
         db.collection(collectionName).get().addOnSuccessListener(
