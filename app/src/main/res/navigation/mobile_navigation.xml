@@ -74,5 +74,18 @@
         android:id="@+id/navPrepFragment"
         android:name="com.gng2101groupb32.pathfindr.ui.navigate.NavPrepFragment"
         android:label="@string/title_nav_prep"
-        tools:layout="@layout/fragment_nav_prep" />
+        tools:layout="@layout/fragment_nav_prep">
+        <action
+            android:id="@+id/action_navPrepFragment_to_navMainFragment"
+            app:destination="@id/navMainFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/navMainFragment"
+        android:name="com.gng2101groupb32.pathfindr.ui.navigate.NavMainFragment"
+        android:label="fragment_nav_main"
+        tools:layout="@layout/fragment_nav_main">
+        <action
+            android:id="@+id/action_navMainFragment_to_navigation_nav_list"
+            app:destination="@id/navigation_nav_list" />
+    </fragment>
 </navigation>
