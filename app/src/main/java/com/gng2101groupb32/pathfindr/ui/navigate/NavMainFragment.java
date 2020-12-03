@@ -61,6 +61,7 @@ public class NavMainFragment extends Fragment implements BeaconConsumer {
 
     // Current Path
     private Path path;
+    private int numInstructions;
 
     // Closest Beacon
     private String closestBeaconId;
@@ -195,6 +196,8 @@ public class NavMainFragment extends Fragment implements BeaconConsumer {
         OnSuccessListener<Path> pathOnSuccessListener = path -> {
             // Define actions after Path is collected
             this.path = path;
+            this.numInstructions = this.path.getInstructions().size();
+            progressBarNav.setMax(numInstructions);
             // Create HashMap of valid beacons and their RSSIs
             for (Instruction i : this.path.getInstructions()) {
                 beaconRSSIMap.put(i.getBeacon().getId(), DEFAULT_RSSI);
