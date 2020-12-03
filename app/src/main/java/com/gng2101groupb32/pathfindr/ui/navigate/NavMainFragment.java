@@ -37,7 +37,12 @@ import org.altbeacon.beacon.RangeNotifier;
 import org.altbeacon.beacon.Region;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * A simple {@link Fragment} subclass. Use the {@link NavMainFragment#newInstance} factory method to
@@ -46,6 +51,7 @@ import java.util.HashMap;
 @SuppressWarnings("FieldCanBeLocal")
 public class NavMainFragment extends Fragment implements BeaconConsumer {
     public static final int DEFAULT_RSSI = -1000;
+    public static final int RSSI_THRESHOLD = -80;
     public static final String TAG = "NavMainFragment";
 
     private BeaconManager beaconManager;
@@ -57,6 +63,9 @@ public class NavMainFragment extends Fragment implements BeaconConsumer {
 
     // Current Path
     private Path path;
+
+    // Closest Beacon
+    private String closestBeaconId;
 
     // ConstraintLayouts
     private ConstraintLayout layoutLoading; // Loading UI
@@ -247,5 +256,27 @@ public class NavMainFragment extends Fragment implements BeaconConsumer {
     @Override
     public boolean bindService(Intent intent, ServiceConnection serviceConnection, int i) {
         return false;
+    }
+
+    private static <T, E> Set<T> getKeysByValue(Map<T, E> map, E value) {
+        return map.entrySet()
+                  .stream()
+                  .filter(entry -> Objects.equals(entry.getValue(), value))
+                  .map(Map.Entry::getKey)
+                  .collect(Collectors.toSet());
+    }
+
+    private void findClosestBeacon() {
+        int maxRSSI = Collections.max(beaconRSSIMap.values());
+        if (maxRSSI >= RSSI_THRESHOLD) {
+            Set<String> closestBeacons = getKeysByValue(beaconRSSIMap, maxRSSI);
+            if (closestBeacons.size() == 1) {
+                closestBeaconId = closestBeacons.iterator().next();
+            }
+            // Do nothing if:
+            // All beacons are out of range
+            // Multiple beacons are equally as close
+            // No beacons are found
+        }
     }
 }
