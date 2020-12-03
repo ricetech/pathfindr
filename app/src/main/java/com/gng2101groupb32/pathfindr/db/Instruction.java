@@ -6,15 +6,20 @@ public class Instruction {
     private DocumentReference beacon;
     private String summary;
     private String verbose;
+    private NavIcon navIcon;
+    private double angle;
 
     public Instruction() {
 
     }
 
-    public Instruction(DocumentReference beacon, String summary, String verbose) {
+    public Instruction(DocumentReference beacon, String summary, String verbose,
+                       NavIcon navIcon, double angle) {
         this.beacon = beacon;
         this.summary = summary;
         this.verbose = verbose;
+        this.navIcon = navIcon;
+        this.angle = angle;
     }
 
     public DocumentReference getBeacon() {
@@ -39,5 +44,21 @@ public class Instruction {
 
     public void setVerbose(String verbose) {
         this.verbose = verbose;
+    }
+
+    public NavIcon getNavIcon() {
+        return navIcon;
+    }
+
+    public void setNavIcon(NavIcon navIcon) {
+        this.navIcon = navIcon;
+    }
+
+    public double getAngle() {
+        return angle;
+    }
+
+    public void setAngle(double angle) {
+        this.angle = angle;
     }
 }
