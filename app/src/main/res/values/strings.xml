@@ -27,4 +27,6 @@
     <string name="settings_employee_title">Employee Settings</string>
     <string name="title_help">Help</string>
     <string name="title_location_view">Location View</string>
+    <string name="button_info">Info</string>
+    <string name="button_nav">Navigate</string>
 </resources>
