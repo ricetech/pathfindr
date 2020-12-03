@@ -9,10 +9,15 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
 import com.gng2101groupb32.pathfindr.R;
+import com.gng2101groupb32.pathfindr.db.PathfindrBeacon;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 
 import org.altbeacon.beacon.Beacon;
 import org.altbeacon.beacon.BeaconConsumer;
@@ -21,7 +26,10 @@ import org.altbeacon.beacon.BeaconParser;
 import org.altbeacon.beacon.RangeNotifier;
 import org.altbeacon.beacon.Region;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass. Use the {@link NavMainFragment#newInstance} factory method to
@@ -30,6 +38,8 @@ import java.util.Collection;
 public class NavMainFragment extends Fragment implements BeaconConsumer {
     public static final String TAG = "NavMainFragment";
     private BeaconManager beaconManager;
+    private List<PathfindrBeacon> pBeacons = new ArrayList<>();
+    private HashMap<String, Integer> beaconRSSIMap = new HashMap<>();
 
     public NavMainFragment() {
         // Required empty public constructor
@@ -51,11 +61,26 @@ public class NavMainFragment extends Fragment implements BeaconConsumer {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // Beacon Initialization
         beaconManager = BeaconManager.getInstanceForApplication(requireContext());
         beaconManager.getBeaconParsers().add(new BeaconParser().setBeaconLayout(
                 "m:2-3=0215,i:4-19,i:20-21,i:22-23,p:24-24"
         ));
         beaconManager.bind(this);
+
+        // Get Beacons to populate beaconRSSIMap
+        OnSuccessListener<List<PathfindrBeacon>> beaconOnSuccessListener = pathfindrBeacons -> {
+            pBeacons = pathfindrBeacons;
+            for (PathfindrBeacon beacon : pBeacons) {
+                String uuid = beacon.getId();
+                beaconRSSIMap.put(uuid, -1000);
+            }
+        };
+        OnFailureListener beaconOnFailureListener = e -> {
+            Toast.makeText(requireContext(), "Unable to fetch beacons. Please try again.", Toast.LENGTH_LONG).show();
+            Log.e(TAG, "Unable to fetch beacons: ", e);
+        };
+        PathfindrBeacon.getBeacons(requireActivity(), beaconOnSuccessListener, beaconOnFailureListener);
     }
 
     @Override
@@ -79,14 +104,8 @@ public class NavMainFragment extends Fragment implements BeaconConsumer {
             public void didRangeBeaconsInRegion(Collection<Beacon> beacons, Region region) {
                 if (beacons.size() > 0) {
                     for (Beacon beacon : beacons) {
-                        Log.i(TAG,
-                              "===" +
-                                      "\nBEACON IDENTIFIED:" +
-                                      "\nID1: " + beacon.getId1().toHexString() + "\nID2: " + beacon.getId2().toHexString() +
-                                      "\nID3: " + beacon.getId3().toHexString() +
-                                      "\nRSSI: " + beacon.getRssi());
+                        beaconRSSIMap.put(beacon.getId1().toString(), beacon.getRssi());
                     }
-                    Log.i(TAG, "The first beacon I see is about " + beacons.iterator().next().getDistance() + " meters away.");
                 }
             }
         });
