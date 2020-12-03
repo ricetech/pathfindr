@@ -78,6 +78,14 @@ public class NavMainFragment extends Fragment implements BeaconConsumer {
             @Override
             public void didRangeBeaconsInRegion(Collection<Beacon> beacons, Region region) {
                 if (beacons.size() > 0) {
+                    for (Beacon beacon : beacons) {
+                        Log.i(TAG,
+                              "===" +
+                                      "\nBEACON IDENTIFIED:" +
+                                      "\nID1: " + beacon.getId1().toHexString() + "\nID2: " + beacon.getId2().toHexString() +
+                                      "\nID3: " + beacon.getId3().toHexString() +
+                                      "\nRSSI: " + beacon.getRssi());
+                    }
                     Log.i(TAG, "The first beacon I see is about " + beacons.iterator().next().getDistance() + " meters away.");
                 }
             }
