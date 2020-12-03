@@ -22,6 +22,7 @@ import androidx.lifecycle.ViewModelStoreOwner;
 import androidx.navigation.Navigation;
 
 import com.gng2101groupb32.pathfindr.R;
+import com.gng2101groupb32.pathfindr.db.Location;
 import com.gng2101groupb32.pathfindr.db.PathfindrBeacon;
 import com.gng2101groupb32.pathfindr.ui.location_info.LocationViewModel;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -50,6 +51,9 @@ public class NavMainFragment extends Fragment implements BeaconConsumer {
     private List<PathfindrBeacon> pBeacons = new ArrayList<>();
     private final HashMap<String, Integer> beaconRSSIMap = new HashMap<>();
     private LocationViewModel locViewModel;
+
+    // Current Destination
+    private Location location;
 
     // ConstraintLayouts
     private ConstraintLayout layoutLoading; // Loading UI
@@ -117,8 +121,11 @@ public class NavMainFragment extends Fragment implements BeaconConsumer {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_nav_main, container, false);
+
+        // Link DB Elements
         locViewModel = new ViewModelProvider((ViewModelStoreOwner) requireActivity())
                 .get(LocationViewModel.class);
+        location = locViewModel.getSelected().getValue();
 
         // Link UI elements
         // ConstraintLayouts
@@ -142,6 +149,9 @@ public class NavMainFragment extends Fragment implements BeaconConsumer {
         btnExit.setOnClickListener(v -> Navigation
                 .findNavController(requireView())
                 .navigate(NavMainFragmentDirections.actionNavMainFragmentToNavigationNavList()));
+
+        // Set UI elements that can be set right now
+        tvDestination.setText(location.getName());
         return view;
     }
 
