@@ -33,10 +33,8 @@ import org.altbeacon.beacon.Beacon;
 import org.altbeacon.beacon.BeaconConsumer;
 import org.altbeacon.beacon.BeaconManager;
 import org.altbeacon.beacon.BeaconParser;
-import org.altbeacon.beacon.RangeNotifier;
 import org.altbeacon.beacon.Region;
 
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -226,13 +224,10 @@ public class NavMainFragment extends Fragment implements BeaconConsumer {
     @Override
     public void onBeaconServiceConnect() {
         beaconManager.removeAllRangeNotifiers();
-        beaconManager.addRangeNotifier(new RangeNotifier() {
-            @Override
-            public void didRangeBeaconsInRegion(Collection<Beacon> beacons, Region region) {
-                if (beacons.size() > 0) {
-                    for (Beacon beacon : beacons) {
-                        beaconRSSIMap.put(beacon.getId1().toString(), beacon.getRssi());
-                    }
+        beaconManager.addRangeNotifier((beacons, region) -> {
+            if (beacons.size() > 0) {
+                for (Beacon beacon : beacons) {
+                    beaconRSSIMap.put(beacon.getId1().toString(), beacon.getRssi());
                 }
             }
         });
