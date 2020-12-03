@@ -9,13 +9,15 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelStoreOwner;
 
 import com.gng2101groupb32.pathfindr.R;
 import com.gng2101groupb32.pathfindr.db.PathfindrBeacon;
+import com.gng2101groupb32.pathfindr.ui.location_info.LocationViewModel;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 
@@ -40,6 +42,7 @@ public class NavMainFragment extends Fragment implements BeaconConsumer {
     private BeaconManager beaconManager;
     private List<PathfindrBeacon> pBeacons = new ArrayList<>();
     private HashMap<String, Integer> beaconRSSIMap = new HashMap<>();
+    private LocationViewModel locViewModel;
 
     public NavMainFragment() {
         // Required empty public constructor
@@ -87,7 +90,10 @@ public class NavMainFragment extends Fragment implements BeaconConsumer {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_nav_main, container, false);
+        View view = inflater.inflate(R.layout.fragment_nav_main, container, false);
+        locViewModel = new ViewModelProvider((ViewModelStoreOwner) requireActivity())
+                .get(LocationViewModel.class);
+        return view;
     }
 
     @Override
