@@ -52,6 +52,13 @@ public class PathfindrBeacon implements FireStoreDoc {
         DBUtils.getLiveCollection(eventListener, COLLECTION_NAME, PathfindrBeacon.class);
     }
 
+    public static void getBeacons(Activity currentActivity,
+                                  final OnSuccessListener<List<PathfindrBeacon>> successListener,
+                                  final OnFailureListener failureListener) {
+        DBUtils.getCollection(currentActivity, successListener, failureListener, COLLECTION_NAME,
+                              PathfindrBeacon.class);
+    }
+
     @Exclude
     @Override
     public String getId() {
