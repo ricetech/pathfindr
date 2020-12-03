@@ -200,19 +200,23 @@ public class NavMainFragment extends Fragment implements BeaconConsumer {
                 beaconRSSIMap.put(i.getBeacon().getId(), DEFAULT_RSSI);
             }
             // Assume the start beacon is included in the instructions - don't add it
-            // Add End Beacon to Map
-            OnSuccessListener<Location> locSuccessListener = loc -> {
-                beaconRSSIMap.put(loc.getBeacon().getId(), DEFAULT_RSSI);
+            OnSuccessListener<Location> startLocSL = startLoc -> {
+                closestBeaconId = startLoc.getBeacon().getId();
                 // Update loading text
                 tvLoading.setText(R.string.finding_beacon);
             };
+            // Add End Beacon to Map
+            OnSuccessListener<Location> endLocSL = endLoc ->
+                    beaconRSSIMap.put(endLoc.getBeacon().getId(), DEFAULT_RSSI);
             OnFailureListener locFailureListener = e -> {
                 Toast.makeText(requireContext(), "Error getting the Beacon. Please try again.",
                                Toast.LENGTH_LONG).show();
                 Log.e(TAG, "Error getting Beacon: ", e);
             };
-            Location.getLocation(requireActivity(), locSuccessListener,
+            Location.getLocation(requireActivity(), endLocSL,
                                  locFailureListener, this.path.getEnd());
+            Location.getLocation(requireActivity(), startLocSL,
+                                 locFailureListener, this.path.getStart());
 
         };
         OnFailureListener pathFailureListener = e -> {
