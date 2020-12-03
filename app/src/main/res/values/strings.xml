@@ -37,4 +37,5 @@ Trying to start navigation while not at a designated location will not work."</s
     <string name="getting_ready">Getting Ready…</string>
     <string name="progress">Progress:</string>
     <string name="exit_navigation">Exit Navigation</string>
+    <string name="repeat_verbal_instructions">Repeat Verbal Instructions</string>
 </resources>

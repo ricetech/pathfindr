@@ -65,6 +65,18 @@
             app:layout_constraintTop_toTopOf="@id/nav_main_progress_text" />
 
         <Button
+            android:id="@+id/nav_main_tts"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/text_margin"
+            android:backgroundTint="?colorSecondary"
+            android:text="@string/repeat_verbal_instructions"
+            app:icon="@drawable/ic_baseline_volume_up_24"
+            app:layout_constraintBottom_toTopOf="@id/nav_main_exit"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
             android:id="@+id/nav_main_exit"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
