@@ -41,4 +41,5 @@ Trying to start navigation while not at a designated location will not work."</s
     <string name="view_instructions_as_text">View Instructions as Text</string>
     <string name="destination">Destination:</string>
     <string name="image_of_general_direction_to_move_in">Image of general direction to move in</string>
+    <string name="finding_beacon">Finding the nearest beacon…</string>
 </resources>

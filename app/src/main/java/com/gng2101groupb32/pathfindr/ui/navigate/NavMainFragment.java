@@ -22,7 +22,9 @@ import androidx.lifecycle.ViewModelStoreOwner;
 import androidx.navigation.Navigation;
 
 import com.gng2101groupb32.pathfindr.R;
+import com.gng2101groupb32.pathfindr.db.Instruction;
 import com.gng2101groupb32.pathfindr.db.Location;
+import com.gng2101groupb32.pathfindr.db.Path;
 import com.gng2101groupb32.pathfindr.db.PathfindrBeacon;
 import com.gng2101groupb32.pathfindr.ui.location_info.LocationViewModel;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -56,6 +58,9 @@ public class NavMainFragment extends Fragment implements BeaconConsumer {
 
     // Current Destination
     private Location location;
+
+    // Current Path
+    private Path path;
 
     // ConstraintLayouts
     private ConstraintLayout layoutLoading; // Loading UI
@@ -103,20 +108,6 @@ public class NavMainFragment extends Fragment implements BeaconConsumer {
                 "m:2-3=0215,i:4-19,i:20-21,i:22-23,p:24-24"
         ));
         beaconManager.bind(this);
-
-        // Get Beacons to populate beaconRSSIMap
-        OnSuccessListener<List<PathfindrBeacon>> beaconOnSuccessListener = pathfindrBeacons -> {
-            pBeacons = pathfindrBeacons;
-            for (PathfindrBeacon beacon : pBeacons) {
-                String uuid = beacon.getId();
-                beaconRSSIMap.put(uuid, DEFAULT_RSSI);
-            }
-        };
-        OnFailureListener beaconOnFailureListener = e -> {
-            Toast.makeText(requireContext(), "Unable to fetch beacons. Please try again.", Toast.LENGTH_LONG).show();
-            Log.e(TAG, "Unable to fetch beacons: ", e);
-        };
-        PathfindrBeacon.getBeacons(requireActivity(), beaconOnSuccessListener, beaconOnFailureListener);
     }
 
     @Override
@@ -157,6 +148,68 @@ public class NavMainFragment extends Fragment implements BeaconConsumer {
         // Set UI elements that can be set right now
         tvDestination.setText(location.getName());
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        // Decide Path based on selected location
+        // TODO: Remove Hard-coding
+        String pathId;
+        switch (this.location.getId()) {
+            case "Kjl1QGi6EaKc4sqMynjM":
+                // Main Entrance to Service Desk
+                pathId = "RZDzndY4TodfnwBuN5GB";
+                break;
+            case "2DiNoX0HZ2pCtfo8rq9R":
+                // Service Desk to Main Entrance
+                pathId = "n6zXBVAL1L4Ud6a7L1XH";
+                break;
+            case "iLsh1otAB9GkDnD5PKm4":
+                // Test Location A to Test Location B
+                pathId = "q3YEdK3uqjb4LX1m9PT0";
+                break;
+            case "8P8rSjAsVuDOLxlQM4rM":
+                // Test Location B to Test Location A
+                pathId = "EI6YIC31JnqtJ5PVTWfK";
+                break;
+            default:
+                pathId = "iLsh1otAB9GkDnD5PKm4";
+                Toast.makeText(requireContext(), "Destination is invalid. Please try again.",
+                               Toast.LENGTH_LONG).show();
+                Log.e(TAG, "Invalid Destination: " + this.location.getId());
+        }
+
+        // Get Path
+        OnSuccessListener<Path> pathOnSuccessListener = path -> {
+            // Define actions after Path is collected
+            this.path = path;
+            // Create HashMap of valid beacons and their RSSIs
+            for (Instruction i : this.path.getInstructions()) {
+                beaconRSSIMap.put(i.getBeacon().getId(), DEFAULT_RSSI);
+            }
+            // Assume the start beacon is included in the instructions - don't add it
+            // Add End Beacon to Map
+            OnSuccessListener<Location> locSuccessListener = loc -> {
+                beaconRSSIMap.put(loc.getBeacon().getId(), DEFAULT_RSSI);
+                // Update loading text
+                tvLoading.setText(R.string.finding_beacon);
+            };
+            OnFailureListener locFailureListener = e -> {
+                Toast.makeText(requireContext(), "Error getting the Beacon. Please try again.",
+                               Toast.LENGTH_LONG).show();
+                Log.e(TAG, "Error getting Beacon: ", e);
+            };
+            Location.getLocation(requireActivity(), locSuccessListener,
+                                 locFailureListener, this.path.getEnd());
+
+        };
+        OnFailureListener pathFailureListener = e -> {
+            Toast.makeText(requireContext(), "Error getting the Path. Please try again.",
+                           Toast.LENGTH_LONG).show();
+            Log.e(TAG, "Error getting Path: ", e);
+        };
+        Path.getPath(requireActivity(), pathOnSuccessListener, pathFailureListener, pathId);
     }
 
     @Override
