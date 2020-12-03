@@ -1,5 +1,6 @@
 package com.gng2101groupb32.pathfindr.ui.navigate;
 
+import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
@@ -62,6 +63,7 @@ public class NavMainFragment extends Fragment implements BeaconConsumer {
     // Current Path
     private Path path;
     private int numInstructions;
+    private Instruction currentInstruction;
 
     // Closest Beacon
     private String closestBeaconId;
@@ -268,12 +270,20 @@ public class NavMainFragment extends Fragment implements BeaconConsumer {
         return false;
     }
 
-    private static <T, E> Set<T> getKeysByValue(Map<T, E> map, E value) {
-        return map.entrySet()
-                  .stream()
-                  .filter(entry -> Objects.equals(entry.getValue(), value))
-                  .map(Map.Entry::getKey)
-                  .collect(Collectors.toSet());
+    private void navigate() {
+        while (!this.closestBeaconId.equals(this.location.getBeacon().getId())) {
+            findClosestBeacon();
+            // Update UI
+            currentInstruction = path.getInstructions().stream().filter(instruction -> closestBeaconId.equals(instruction.getBeacon().getId())).findFirst().orElse(null);
+            if (currentInstruction != null) {
+                // Advance Progress Bar
+                int numCurrentIns = Math.abs(path.getInstructions().indexOf(currentInstruction));
+                ObjectAnimator.ofInt(progressBarNav, "progress", numCurrentIns)
+                              .setDuration(300).start();
+                // Update TextViews
+                tvSummary.setText(currentInstruction.getSummary());
+            }
+        }
     }
 
     private void findClosestBeacon() {
