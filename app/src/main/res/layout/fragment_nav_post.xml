@@ -41,8 +41,8 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/text_margin"
         android:backgroundTint="?colorSecondary"
-        android:text="@string/repeat_verbal_instructions"
-        app:icon="@drawable/ic_baseline_volume_up_24"
+        android:text="@string/title_location_info"
+        app:icon="@drawable/ic_baseline_info_24"
         app:layout_constraintBottom_toTopOf="@id/nav_post_exit"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
