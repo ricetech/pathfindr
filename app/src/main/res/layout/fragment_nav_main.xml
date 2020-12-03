@@ -65,6 +65,22 @@
             app:layout_constraintTop_toTopOf="@id/nav_main_progress_text" />
 
         <Button
+            android:id="@+id/nav_main_text"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/text_margin"
+            android:text="@string/view_instructions_as_text"
+            android:textColor="?colorOnBackground"
+            app:icon="@drawable/ic_baseline_text_fields_24"
+            app:iconTint="?colorOnBackground"
+            app:layout_constraintBottom_toTopOf="@id/nav_main_tts"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:rippleColor="?colorSecondary"
+            app:strokeColor="?colorSecondary" />
+
+        <Button
             android:id="@+id/nav_main_tts"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
