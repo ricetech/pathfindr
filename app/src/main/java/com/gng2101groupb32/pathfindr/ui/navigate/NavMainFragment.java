@@ -247,9 +247,9 @@ public class NavMainFragment extends Fragment implements BeaconConsumer {
                     beaconRSSIMap.put(beacon.getId1().toString(), beacon.getRssi());
                 }
             }
-            layoutLoading.setVisibility(View.GONE);
             findClosestBeacon();
             if (!this.closestBeaconId.equals(this.location.getBeacon().getId())) {
+                layoutLoading.setVisibility(View.GONE);
                 Log.i(TAG, closestBeaconId);
                 currentInstruction = path.getInstructions().stream().filter(instruction -> closestBeaconId.equals(instruction.getBeacon().getId())).findFirst().orElse(null);
                 if (currentInstruction != null) {
