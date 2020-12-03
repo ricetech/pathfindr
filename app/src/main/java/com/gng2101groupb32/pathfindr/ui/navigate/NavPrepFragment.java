@@ -12,6 +12,7 @@ import android.widget.Button;
 
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 
 import com.gng2101groupb32.pathfindr.R;
@@ -63,6 +64,9 @@ public class NavPrepFragment extends Fragment {
                     == PackageManager.PERMISSION_GRANTED) {
                 // Permission granted, continue
                 Log.d("NPF", "onCreateView: Perms OK");
+                NavDirections directions = NavPrepFragmentDirections
+                        .actionNavPrepFragmentToNavMainFragment();
+                Navigation.findNavController(requireView()).navigate(directions);
             } else if (shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_FINE_LOCATION)) {
                 final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(requireContext());
                 alertDialogBuilder.setTitle("This app requires access to your location");
@@ -110,6 +114,9 @@ public class NavPrepFragment extends Fragment {
             case PERMISSION_REQUEST_FINE_LOCATION: {
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     Log.d(TAG, "Fine location permission granted");
+                    NavDirections directions = NavPrepFragmentDirections
+                            .actionNavPrepFragmentToNavMainFragment();
+                    Navigation.findNavController(requireView()).navigate(directions);
                 } else {
                     final AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
                     builder.setTitle("Functionality limited");
