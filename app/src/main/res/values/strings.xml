@@ -34,4 +34,5 @@ Trying to start navigation while not at a designated location will not work."</s
     <string name="title_nav_prep">Instructions - Read Carefully</string>
     <string name="next">Next</string>
     <string name="title_nav_main">Navigate</string>
+    <string name="getting_ready">Getting Ready…</string>
 </resources>
