@@ -64,6 +64,16 @@
             app:layout_constraintStart_toEndOf="@id/nav_main_progress_text"
             app:layout_constraintTop_toTopOf="@id/nav_main_progress_text" />
 
+        <TextView
+            android:id="@+id/nav_main_summary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/text_margin"
+            android:textAlignment="center"
+            android:textColor="?colorOnBackground"
+            android:textSize="45sp"
+            app:layout_constraintTop_toBottomOf="@id/nav_main_progress_text" />
+
         <Button
             android:id="@+id/nav_main_text"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
