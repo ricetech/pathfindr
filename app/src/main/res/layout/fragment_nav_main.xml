@@ -71,7 +71,7 @@
             android:layout_margin="@dimen/text_margin"
             android:textAlignment="center"
             android:textColor="?colorOnBackground"
-            android:textSize="45sp"
+            android:textSize="35sp"
             app:layout_constraintTop_toBottomOf="@id/nav_main_progress_text" />
 
         <ImageView
