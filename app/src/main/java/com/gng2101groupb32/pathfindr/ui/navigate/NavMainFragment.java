@@ -9,11 +9,17 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelStoreOwner;
+import androidx.navigation.Navigation;
 
 import com.gng2101groupb32.pathfindr.R;
 import com.gng2101groupb32.pathfindr.db.PathfindrBeacon;
@@ -37,12 +43,32 @@ import java.util.List;
  * A simple {@link Fragment} subclass. Use the {@link NavMainFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
+@SuppressWarnings("FieldCanBeLocal")
 public class NavMainFragment extends Fragment implements BeaconConsumer {
     public static final String TAG = "NavMainFragment";
     private BeaconManager beaconManager;
     private List<PathfindrBeacon> pBeacons = new ArrayList<>();
     private final HashMap<String, Integer> beaconRSSIMap = new HashMap<>();
     private LocationViewModel locViewModel;
+
+    // ConstraintLayouts
+    private ConstraintLayout layoutLoading; // Loading UI
+    private ConstraintLayout layoutNav; // Nav UI
+
+    // Loading UI
+    private ProgressBar progressBarLoading;
+
+    // Nav UI
+    private ProgressBar progressBarNav;
+    private TextView tvSummary;
+    private ImageView ivNavIcon;
+    private TextView tvDestination;
+
+    private Button btnText;
+    private Button btnTTS;
+
+    // Exit Button (Always visible)
+    private Button btnExit;
 
     public NavMainFragment() {
         // Required empty public constructor
@@ -93,6 +119,29 @@ public class NavMainFragment extends Fragment implements BeaconConsumer {
         View view = inflater.inflate(R.layout.fragment_nav_main, container, false);
         locViewModel = new ViewModelProvider((ViewModelStoreOwner) requireActivity())
                 .get(LocationViewModel.class);
+
+        // Link UI elements
+        // ConstraintLayouts
+        layoutLoading = view.findViewById(R.id.nav_main_loading);
+        layoutNav = view.findViewById(R.id.nav_list_nav);
+
+        // Loading UI
+        progressBarLoading = view.findViewById(R.id.nav_main_loading_bar);
+
+        // Nav UI
+        progressBarNav = view.findViewById(R.id.nav_main_progress_bar);
+        tvSummary = view.findViewById(R.id.nav_main_summary);
+        ivNavIcon = view.findViewById(R.id.nav_main_icon);
+        tvDestination = view.findViewById(R.id.nav_main_destination);
+
+        btnText = view.findViewById(R.id.nav_main_text);
+        btnTTS = view.findViewById(R.id.nav_main_tts);
+
+        // Exit Button (Always visible)
+        btnExit = view.findViewById(R.id.nav_main_exit);
+        btnExit.setOnClickListener(v -> Navigation
+                .findNavController(requireView())
+                .navigate(NavMainFragmentDirections.actionNavMainFragmentToNavigationNavList()));
         return view;
     }
 
