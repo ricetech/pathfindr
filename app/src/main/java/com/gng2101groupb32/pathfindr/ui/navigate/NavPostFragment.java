@@ -77,5 +77,9 @@ public class NavPostFragment extends Fragment {
         // Connect Exit button
         view.findViewById(R.id.nav_post_exit).setOnClickListener(view1 -> navController
                 .navigate(NavPostFragmentDirections.actionNavPostFragmentToNavigationHome()));
+
+        // Connect Info button
+        view.findViewById(R.id.nav_post_info).setOnClickListener(view2 -> navController
+                .navigate(NavPostFragmentDirections.actionNavPostFragmentToLocationViewFragment()));
     }
 }
