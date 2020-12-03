@@ -42,4 +42,8 @@ Trying to start navigation while not at a designated location will not work."</s
     <string name="destination">Destination:</string>
     <string name="image_of_general_direction_to_move_in">Image of general direction to move in</string>
     <string name="finding_beacon">Finding the nearest beacon…</string>
+    <string name="title_nav_post">Navigation Completed</string>
+    <string name="nav_post_text_header">Welcome to the %s.</string>
+    <string name="nav_post_text_body">Navigation has been completed successfully.
+You can return to the main menu to navigate elsewhere, or view more information about this location.</string>
 </resources>

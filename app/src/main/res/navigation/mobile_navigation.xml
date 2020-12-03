@@ -90,4 +90,9 @@
             app:popUpToInclusive="true"
             app:destination="@id/navigation_nav_list" />
     </fragment>
+    <fragment
+        android:id="@+id/navPostFragment"
+        android:name="com.gng2101groupb32.pathfindr.ui.navigate.NavPostFragment"
+        android:label="@string/title_nav_post"
+        tools:layout="@layout/fragment_nav_post" />
 </navigation>
