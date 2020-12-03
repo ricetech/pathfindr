@@ -32,4 +32,37 @@
             app:layout_constraintTop_toBottomOf="@id/nav_main_loading_bar" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/nav_main_nav"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/nav_main_loading">
+
+        <TextView
+            android:id="@+id/nav_main_progress_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/text_margin"
+            android:text="@string/progress"
+            android:textColor="?colorOnBackground"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ProgressBar
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/text_margin"
+            android:indeterminate="false"
+            android:progress="0"
+            android:progressTint="?colorSecondary"
+            app:layout_constraintBottom_toBottomOf="@id/nav_main_progress_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/nav_main_progress_text"
+            app:layout_constraintTop_toTopOf="@id/nav_main_progress_text" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
