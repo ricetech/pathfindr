@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.RemoteException;
+import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,6 +41,7 @@ import org.altbeacon.beacon.Region;
 
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
@@ -90,6 +92,9 @@ public class NavMainFragment extends Fragment implements BeaconConsumer {
     // Exit Button (Always visible)
     private Button btnExit;
 
+    // TTS
+    private TextToSpeech tts;
+
     public NavMainFragment() {
         // Required empty public constructor
     }
@@ -118,6 +123,10 @@ public class NavMainFragment extends Fragment implements BeaconConsumer {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        tts = new TextToSpeech(requireContext(), status -> {
+            tts.setLanguage(Locale.US);
+        });
     }
 
     @Override
@@ -239,6 +248,7 @@ public class NavMainFragment extends Fragment implements BeaconConsumer {
     public void onDestroy() {
         super.onDestroy();
         beaconManager.unbind(this);
+        tts.shutdown();
     }
 
     @Override
@@ -254,6 +264,7 @@ public class NavMainFragment extends Fragment implements BeaconConsumer {
             if (!this.closestBeaconId.equals(this.location.getBeacon().getId())) {
                 layoutLoading.setVisibility(View.GONE);
                 Log.i(TAG, closestBeaconId);
+                Instruction previousInstruction = currentInstruction;
                 currentInstruction = path.getInstructions().stream().filter(instruction -> closestBeaconId.equals(instruction.getBeacon().getId())).findFirst().orElse(null);
                 if (currentInstruction != null) {
                     // Advance Progress Bar
@@ -262,7 +273,7 @@ public class NavMainFragment extends Fragment implements BeaconConsumer {
                                   .setDuration(300).start();
                     // Update TextViews
                     tvSummary.setText(currentInstruction.getSummary());
-                    // Update Button OnClickListener
+                    // Update Button OnClickListeners
                     btnText.setOnClickListener(view -> {
                         final AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
                         builder.setTitle(currentInstruction.getSummary());
@@ -270,6 +281,8 @@ public class NavMainFragment extends Fragment implements BeaconConsumer {
                         builder.setPositiveButton(android.R.string.ok, null);
                         builder.show();
                     });
+                    btnTTS.setOnClickListener(view -> readTTS());
+
                     // Update Icon
                     @DrawableRes int imgDrawable = R.drawable.ic_baseline_navigation_24;
                     double rotation = 0;
@@ -289,6 +302,11 @@ public class NavMainFragment extends Fragment implements BeaconConsumer {
                     }
                     ivNavIcon.setImageResource(imgDrawable);
                     ivNavIcon.setRotation((float) rotation);
+
+                    // Notify User
+                    if (currentInstruction != previousInstruction) {
+                        readTTS();
+                    }
                 }
             } else {
                 Log.i(TAG, "Done");
@@ -328,5 +346,9 @@ public class NavMainFragment extends Fragment implements BeaconConsumer {
             // Multiple beacons are equally as close
             // No beacons are found
         }
+    }
+
+    private void readTTS() {
+        tts.speak(currentInstruction.getVerbose(), TextToSpeech.QUEUE_FLUSH, null, null);
     }
 }
