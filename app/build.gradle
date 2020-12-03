@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
     id "androidx.navigation.safeargs"
     id "com.google.gms.google-services"
+    id "com.google.firebase.appdistribution"
 }
 
 android {
@@ -21,6 +22,18 @@ android {
     buildTypes {
         release {
             minifyEnabled false
+            firebaseAppDistribution {
+                releaseNotes=""
+                groups="stable"
+            }
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            minifyEnabled false
+            firebaseAppDistribution {
+                releaseNotes=""
+                groups="beta"
+            }
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
