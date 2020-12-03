@@ -24,6 +24,7 @@ import static android.content.DialogInterface.BUTTON_POSITIVE;
 public class NavPrepFragment extends Fragment {
     public static final String TAG = "NavPrepFragment";
     public static final int PERMISSION_REQUEST_FINE_LOCATION = 1;
+    @SuppressWarnings("FieldCanBeLocal")
     private Button btnNext;
 
     public NavPrepFragment() {
