@@ -1,6 +1,7 @@
 package com.gng2101groupb32.pathfindr.ui.navigate;
 
 import android.animation.ObjectAnimator;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
@@ -41,6 +42,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 /**
@@ -271,6 +273,32 @@ public class NavMainFragment extends Fragment implements BeaconConsumer {
     }
 
     private void navigate() {
+        // Stabilize Bluetooth RSSI inputs
+        try {
+            TimeUnit.SECONDS.sleep(3);
+        } catch (InterruptedException e) {
+            Log.e(TAG, "Sleep Error: ", e);
+        }
+        // Modified version of findClosestBeacon()
+        while (true) {
+            int maxRSSI = Collections.max(beaconRSSIMap.values());
+            if (maxRSSI >= RSSI_THRESHOLD) {
+                Set<String> closestBeacons = getKeysByValue(beaconRSSIMap, maxRSSI);
+                if (closestBeacons.size() == 1) {
+                    closestBeaconId = closestBeacons.iterator().next();
+                    break;
+                }
+            } else {
+                final AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
+                builder.setTitle("No Beacons Found");
+                builder.setMessage(
+                        "Please move closer to a beacon and try again.");
+                builder.setPositiveButton(android.R.string.ok, null);
+                builder.setOnDismissListener(dialog -> Navigation.findNavController(requireView()).navigateUp());
+                builder.show();
+            }
+        }
+
         while (!this.closestBeaconId.equals(this.location.getBeacon().getId())) {
             findClosestBeacon();
             // Update UI
