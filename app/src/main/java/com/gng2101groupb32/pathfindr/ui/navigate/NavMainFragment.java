@@ -349,9 +349,11 @@ public class NavMainFragment extends Fragment implements BeaconConsumer {
                     }
                 }
             } else {
-                // Destination Reached
-                if (navController.getCurrentDestination().getId() == R.id.navMainFragment) {
-                    navController.navigate(NavMainFragmentDirections.actionNavMainFragmentToNavPostFragment());
+                if (this.closestBeaconId != null && this.location != null && this.location.getBeacon() != null) {
+                    // Destination Reached
+                    if (navController.getCurrentDestination().getId() == R.id.navMainFragment) {
+                        navController.navigate(NavMainFragmentDirections.actionNavMainFragmentToNavPostFragment());
+                    }
                 }
             }
         });
