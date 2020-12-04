@@ -1,12 +1,13 @@
 package com.gng2101groupb32.pathfindr.ui.home;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -57,9 +58,11 @@ public class HomeFragment extends Fragment {
             Navigation.findNavController(root).navigate(directions);
         });
 
-        btnHelp.setOnClickListener(view -> Toast.makeText(getContext(),
-                                                          "Error: This feature is not implemented yet!",
-                                                          Toast.LENGTH_LONG).show());
+        btnHelp.setOnClickListener(view -> {
+            Uri uri = Uri.parse("https://drive.google.com/file/d/1wASBQv5rY6GFpNui0vYFn5DYXkONQUF2/view?usp=sharing");
+            Intent launchBrowser = new Intent(Intent.ACTION_VIEW, uri);
+            startActivity(launchBrowser);
+        });
 
         btnSettings.setOnClickListener(view -> {
             NavDirections directions = HomeFragmentDirections
