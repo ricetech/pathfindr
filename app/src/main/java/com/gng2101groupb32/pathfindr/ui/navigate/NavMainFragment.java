@@ -38,6 +38,7 @@ import com.gng2101groupb32.pathfindr.ui.location_info.LocationViewModel;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.analytics.FirebaseAnalytics;
+import com.google.firebase.crashlytics.FirebaseCrashlytics;
 
 import org.altbeacon.beacon.Beacon;
 import org.altbeacon.beacon.BeaconConsumer;
@@ -246,6 +247,7 @@ public class NavMainFragment extends Fragment implements BeaconConsumer {
                 Toast.makeText(requireContext(), "Destination is invalid. Please try again.",
                                Toast.LENGTH_LONG).show();
                 Log.e(TAG, "Invalid Destination: " + this.location.getId());
+                FirebaseCrashlytics.getInstance().log("Invalid Destination: " + this.location.getId());
         }
 
         // Get Path
@@ -276,6 +278,7 @@ public class NavMainFragment extends Fragment implements BeaconConsumer {
                 Toast.makeText(requireContext(), "Error getting the Beacon. Please try again.",
                                Toast.LENGTH_LONG).show();
                 Log.e(TAG, "Error getting Beacon: ", e);
+                FirebaseCrashlytics.getInstance().recordException(e);
             };
             Location.getLocation(requireActivity(), endLocSL,
                                  locFailureListener, this.path.getEnd());
@@ -287,6 +290,7 @@ public class NavMainFragment extends Fragment implements BeaconConsumer {
             Toast.makeText(requireContext(), "Error getting the Path. Please try again.",
                            Toast.LENGTH_LONG).show();
             Log.e(TAG, "Error getting Path: ", e);
+            FirebaseCrashlytics.getInstance().recordException(e);
         };
         Path.getPath(requireActivity(), pathOnSuccessListener, pathFailureListener, pathId);
     }
