@@ -9,8 +9,12 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 public class MainActivity extends AppCompatActivity {
+    @SuppressWarnings({"FieldCanBeLocal", "unused", "RedundantSuppression"})
+    private FirebaseAnalytics mFirebaseAnalytics;
+
     final AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
             R.id.navigation_home, R.id.navigation_settings, R.id.navigation_announcements,
             R.id.navigation_nav_list, R.id.navigation_loc_list)
@@ -27,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
+
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
     }
 
     @Override
