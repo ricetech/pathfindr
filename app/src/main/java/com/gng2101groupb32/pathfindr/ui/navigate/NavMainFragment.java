@@ -258,6 +258,11 @@ public class NavMainFragment extends Fragment implements BeaconConsumer {
             for (Instruction i : this.path.getInstructions()) {
                 beaconRSSIMap.put(i.getBeacon().getId(), DEFAULT_RSSI);
             }
+            // Record destination in Firebase Analytics
+            Bundle destinationLog = new Bundle();
+            destinationLog.putString(FirebaseAnalytics.Param.ITEM_ID, path.getId());
+            destinationLog.putString(FirebaseAnalytics.Param.ITEM_NAME, path.getName());
+            firebaseAnalytics.logEvent("start_nav_to_dest", destinationLog);
             // Assume the start beacon is included in the instructions - don't add it
             OnSuccessListener<Location> startLocSL = startLoc -> {
                 closestBeaconId = startLoc.getBeacon().getId();
