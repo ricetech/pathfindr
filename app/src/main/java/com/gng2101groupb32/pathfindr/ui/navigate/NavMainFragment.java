@@ -37,6 +37,7 @@ import com.gng2101groupb32.pathfindr.db.Path;
 import com.gng2101groupb32.pathfindr.ui.location_info.LocationViewModel;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 import org.altbeacon.beacon.Beacon;
 import org.altbeacon.beacon.BeaconConsumer;
@@ -64,6 +65,8 @@ public class NavMainFragment extends Fragment implements BeaconConsumer {
     public static final int DEFAULT_RSSI = -1000;
     public static final int RSSI_THRESHOLD = -80;
     public static final String TAG = "NavMainFragment";
+
+    private FirebaseAnalytics firebaseAnalytics;
 
     private final HashMap<String, Integer> beaconRSSIMap = new HashMap<>();
     private BeaconManager beaconManager;
@@ -141,6 +144,8 @@ public class NavMainFragment extends Fragment implements BeaconConsumer {
         tts = new TextToSpeech(requireContext(), status -> tts.setLanguage(Locale.US));
 
         vibrator = (Vibrator) requireContext().getSystemService(Context.VIBRATOR_SERVICE);
+
+        firebaseAnalytics = FirebaseAnalytics.getInstance(requireContext());
     }
 
     @Override
