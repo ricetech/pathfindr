@@ -59,7 +59,7 @@ public class HomeFragment extends Fragment {
         });
 
         btnHelp.setOnClickListener(view -> {
-            Uri uri = Uri.parse("https://drive.google.com/file/d/1wASBQv5rY6GFpNui0vYFn5DYXkONQUF2/view?usp=sharing");
+            Uri uri = Uri.parse("https://drive.google.com/file/d/1yfG14BLykXVWyWePU1zURRFBOdbZNiFw/view?usp=sharing");
             Intent launchBrowser = new Intent(Intent.ACTION_VIEW, uri);
             startActivity(launchBrowser);
         });
